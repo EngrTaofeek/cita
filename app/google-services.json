@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "573506764421",
+    "firebase_url": "https://cita-e1639.firebaseio.com",
+    "project_id": "cita-e1639",
+    "storage_bucket": "cita-e1639.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573506764421:android:2f494579abe6cb0c3a33ec",
+        "android_client_info": {
+          "package_name": "com.taofeek.cita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573506764421-nh816r1215sa88mfs13o34plv3699elh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByN7W9xZJrwH5e-BFPBfJtqCxx-BCRYxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "573506764421-nh816r1215sa88mfs13o34plv3699elh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
