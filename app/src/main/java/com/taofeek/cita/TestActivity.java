@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -32,8 +33,8 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        mEmail = (EditText) findViewById(R.id.t_email);
-        mPassword = (EditText) findViewById(R.id.t_password);
+        mEmail = (EditText) findViewById(R.id.email);
+        mPassword = (EditText) findViewById(R.id.password);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
         Button signIn = (Button) findViewById(R.id.loginbutton);
@@ -42,7 +43,20 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
-                signInMethod(email,password);
+                //check if the fields are filled out
+                if (!isEmpty(mEmail.getText().toString())
+                        && !isEmpty(mPassword.getText().toString())) {
+                    Log.d(TAG, "onClick: attempting to authenticate.");
+                    hideSoftKeyboard();
+
+                    showDialog();
+                    signInMethod(email, password);
+                }
+                else{
+                    hideDialog();
+                    Toast.makeText(TestActivity.this, "Fill both email and password fields",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
         TextView register = (TextView) findViewById(R.id.link_register);
@@ -73,6 +87,7 @@ public class TestActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            hideDialog();
                             Intent intent = new Intent(TestActivity.this,MainActivity.class);
                             startActivity(intent);
                         } else {
@@ -87,5 +102,25 @@ public class TestActivity extends AppCompatActivity {
                     }
                 });
     }
+    private boolean isEmpty(String string){
+        return string.equals("");
+    }
+
+
+    private void showDialog(){
+        mProgressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hideDialog(){
+        if(mProgressBar.getVisibility() == View.VISIBLE){
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void hideSoftKeyboard(){
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
 
 }

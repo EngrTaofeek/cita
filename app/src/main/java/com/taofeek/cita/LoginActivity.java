@@ -14,11 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.taofeek.cita.customer.UserEditActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -33,64 +36,37 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
-        mEmail = (EditText) findViewById(R.id.t_email);
-        mPassword = (EditText) findViewById(R.id.t_password);
+        mEmail = (EditText) findViewById(R.id.email);
+        mPassword = (EditText) findViewById(R.id.password);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
-        setupFirebaseAuth();
 
         Button signIn = (Button) findViewById(R.id.loginbutton);
-        setupFirebaseAuth();
-
-
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View v) {
+                String email = mEmail.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
                 //check if the fields are filled out
-                if(!isEmpty(mEmail.getText().toString())
-                        && !isEmpty(mPassword.getText().toString())){
+                if (!isEmpty(mEmail.getText().toString())
+                        && !isEmpty(mPassword.getText().toString())) {
                     Log.d(TAG, "onClick: attempting to authenticate.");
+                    hideSoftKeyboard();
 
                     showDialog();
-
-
-
-                    FirebaseAuth.getInstance().signInWithEmailAndPassword(mEmail.getText().toString(),
-                            mPassword.getText().toString())
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()){
-                                        hideDialog();
-                                        setupFirebaseAuth();
-
-                                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        hideDialog();
-                                        Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                    }
-
-
-
-                                }
-                            }); /*.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                            hideDialog();
-                        }
-                    });*/
-                }else{
-                    Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
+                    signInMethod(email, password);
+                }
+                else{
+                    hideDialog();
+                    Toast.makeText(LoginActivity.this, "Fill both email and password fields",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -100,31 +76,83 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+        TextView resendVerification = findViewById(R.id.resend_verification_email);
+        resendVerification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendVerificationEmail();
+
             }
         });
 
-        TextView resetPassword = (TextView) findViewById(R.id.forgot_password);
-        /*resetPassword.setOnClickListener(new View.OnClickListener() {
+        TextView testing = findViewById(R.id.forgot_password);
+        testing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PasswordResetDialog dialog = new PasswordResetDialog();
-                dialog.show(getSupportFragmentManager(), "dialog_password_reset");
+                Intent testintent = new Intent( LoginActivity.this, UserEditActivity.class);
+                startActivity(testintent);
             }
         });
 
-        TextView resendEmailVerification = (TextView) findViewById(R.id.resend_verification_email);
-        resendEmailVerification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ResendVerificationDialog dialog = new ResendVerificationDialog();
-                dialog.show(getSupportFragmentManager(), "dialog_resend_email_verification");
-            }
-        });*/
+    }
 
-        hideSoftKeyboard();
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
 
+    }
+    public void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Sent Verification Email", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "couldn't send email", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
 
+    }
+
+    public void signInMethod (String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                            hideDialog();
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
     }
     private boolean isEmpty(String string){
         return string.equals("");
@@ -144,55 +172,5 @@ public class LoginActivity extends AppCompatActivity {
 
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-    }
-
-    /*
-        ----------------------------- Firebase setup ---------------------------------
-     */
-    private void setupFirebaseAuth(){
-        Log.d(TAG, "setupFirebaseAuth: started.");
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-
-                    //check if email is verified
-                    if(user.isEmailVerified()){
-                        Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                        Toast.makeText(LoginActivity.this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Email is not Verified\nCheck your Inbox", Toast.LENGTH_SHORT).show();
-                        FirebaseAuth.getInstance().signOut();
-                    }
-
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-                // ...
-            }
-        };
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
-        }
     }
 }
