@@ -8,7 +8,7 @@
     tools:context=".customer.UserEditActivity">
 
     <ImageView
-        android:id="@+id/eser_profile_pic"
+        android:id="@+id/user_profile_pic"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="24dp"
@@ -31,7 +31,7 @@
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eser_profile_pic" />
+        app:layout_constraintTop_toBottomOf="@+id/user_profile_pic" />
 
     <EditText
         android:id="@+id/user_edit_address"
@@ -76,4 +76,14 @@
         app:layout_constraintEnd_toEndOf="@+id/user_edit_email"
         app:layout_constraintStart_toStartOf="@+id/user_edit_email"
         app:layout_constraintTop_toBottomOf="@+id/user_edit_email" />
+
+    <Button
+        android:id="@+id/user_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="SAVE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_facility_spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -33,16 +35,38 @@ public class UserEditActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_edit);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Button saveButton = findViewById(R.id.user_save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTextDocuments();
+            }
+        });
+
+
+    }
+
+    public void addTextDocuments(){
+        EditText etname = findViewById(R.id.user_edit_name);
+        EditText etemail = findViewById(R.id.user_edit_email);
+        EditText etaddress = findViewById(R.id.user_edit_address);
+        EditText etphone = findViewById(R.id.user_edit_phone);
+        String name = getEditText(etname);
+        String email = getEditText(etemail);
+        String phone = getEditText(etphone);
+        String address = getEditText(etaddress);
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        user.put("name", name);
+        user.put("email", email);
+        user.put("address", address);
+        user.put("phone", phone);
 
 // Add a new document with a generated ID
-        db.collection("users")
+        db.collection("users").document("details").collection("profile")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -57,6 +81,11 @@ public class UserEditActivity extends AppCompatActivity implements
                     }
                 });
 
+
+    }
+    public String getEditText (EditText editText){
+        String text = editText.getText().toString().trim();
+        return text;
     }
 
     @Override
