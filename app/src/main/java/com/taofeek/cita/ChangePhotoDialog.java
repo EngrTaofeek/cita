@@ -101,6 +101,7 @@ public class ChangePhotoDialog extends DialogFragment {
         }
         super.onAttach(context);
     }
+
 }
 
 

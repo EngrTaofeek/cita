@@ -3,6 +3,7 @@ package com.taofeek.cita.customer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,12 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 import com.taofeek.cita.ChangePhotoDialog;
 import com.taofeek.cita.R;
 
@@ -29,6 +32,9 @@ public class UserEditActivity extends AppCompatActivity implements
     private String TAG = "testing";
     EditText mName,mEmail,mAddress,mPhone;
     Spinner mFacilitySpinner;
+    private ImageView mImageView;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private Uri mImageUri;
 
 
     @Override
@@ -37,6 +43,14 @@ public class UserEditActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_user_edit);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Button saveButton = findViewById(R.id.user_save_button);
+        mImageView = findViewById(R.id.user_profile_pic);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+
+            }
+        });
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,5 +110,20 @@ public class UserEditActivity extends AppCompatActivity implements
     @Override
     public void getImageBitmap(Bitmap bitmap) {
 
+    }
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+            Picasso.get().load(mImageUri).into(mImageView);
+        }
     }
 }
