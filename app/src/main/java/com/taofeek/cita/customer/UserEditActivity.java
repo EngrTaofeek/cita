@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,6 +32,8 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.ChangePhotoDialog;
+import com.taofeek.cita.LoginActivity;
+import com.taofeek.cita.MainActivity;
 import com.taofeek.cita.R;
 
 import java.util.HashMap;
@@ -56,10 +60,11 @@ public class UserEditActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_edit);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads/profile");
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mName = findViewById(R.id.user_edit_name);
         mProgressBar = findViewById(R.id.progress_bar);
         Button saveButton = findViewById(R.id.user_save_button);
+        checkAuthenticationState();
         mImageView = findViewById(R.id.user_profile_pic);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,9 +135,8 @@ public class UserEditActivity extends AppCompatActivity implements
 
     }
     private void openFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent( Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
     @Override
@@ -167,10 +171,28 @@ public class UserEditActivity extends AppCompatActivity implements
                             Toast.makeText(UserEditActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
 
 
+                            String imageUrl = fileReference.getDownloadUrl().toString();
                             Upload upload = new Upload(mName.getText().toString().trim(),
-                                    fileReference.getDownloadUrl().toString());
-//                            String uploadId = mDatabaseRef.push().getKey();
-//                            mDatabaseRef.child(uploadId).setValue(upload);
+                                    imageUrl);
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            // Create a new user with a first and last name
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("image_url", imageUrl);
+                            db.collection("users").document("details").collection("profile")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -190,4 +212,22 @@ public class UserEditActivity extends AppCompatActivity implements
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
+    private void checkAuthenticationState(){
+        Log.d(TAG, "checkAuthenticationState: checking authentication state.");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user == null){
+            Log.d(TAG, "checkAuthenticationState: user is null, navigating back to login screen.");
+
+            Intent intent = new Intent(UserEditActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }else{
+            Log.d(TAG, "checkAuthenticationState: user is authenticated.");
+        }
+    }
+
+
 }
