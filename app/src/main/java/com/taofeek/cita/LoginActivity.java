@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.taofeek.cita.customer.UserEditActivity;
+import com.taofeek.cita.organization.FacilityHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -89,13 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         TextView testing = findViewById(R.id.forgot_password);
-        testing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent testintent = new Intent( LoginActivity.this, UserEditActivity.class);
-                startActivity(testintent);
-            }
-        });
+
 
     }
 
@@ -128,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signInMethod (String email, String password){
+        final CheckBox checkBox = findViewById(R.id.login_check_box);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -138,10 +135,18 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             hideDialog();
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+                            Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);
+                            if (checkBox.isChecked()){
+                                startActivity(facility_intent);
+                                finish();
+                            }
+                            else {
+                                startActivity(user_intent);
+                                finish();
+
+                            }
+                                 }
                         else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

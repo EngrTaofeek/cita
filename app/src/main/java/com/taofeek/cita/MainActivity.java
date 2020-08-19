@@ -36,13 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
         checkAuthenticationState();
         TextView testtext = findViewById(R.id.test_textview);
-        testtext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserEditActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
         setupFirebaseAuth();

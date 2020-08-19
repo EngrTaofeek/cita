@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.taofeek.cita">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".organization.FacilityEditActivity"></activity>
+        <activity
+            android:name=".organization.FacilityHomeActivity"
+            android:label="@string/title_activity_facility_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".OrganiztaionActivity"
+            android:label="@string/title_activity_organiztaion"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".organization.FacilityActivity"
+            android:label="@string/title_activity_facility"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_user_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".organization.FacilityEditActivity" />
         <activity android:name=".customer.UserEditActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".RegisterActivity" />
