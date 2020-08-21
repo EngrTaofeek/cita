@@ -11,17 +11,17 @@
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="70dp"
-        android:textAlignment="center"
+        android:fontFamily="@font/playfair_display"
         android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="60sp"
         android:text="@string/sign_up"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-light"/>
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="64sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/create_account"
@@ -33,7 +33,7 @@
         android:layout_marginTop="25dp"
         android:textAlignment="center"
         android:gravity="center"
-        android:textColor="#120A8F"
+        android:textColor="@color/button_color"
         android:textSize="25sp"
         android:textStyle="normal"
         android:text="@string/create_account"/>
@@ -47,7 +47,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="35dp"
-        android:textColor="#120A8F"
+        android:textColor="@color/button_color"
         android:textSize="20sp"
         android:text="@string/email"/>
 
@@ -75,7 +75,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:textSize="20sp"
-        android:textColor="#120A8F"
+        android:textColor="@color/button_color"
         android:text="@string/password"/>
 
     <EditText
@@ -101,7 +101,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:text="@string/facilitate"
-        android:textColor="#120A8F"
+        android:textColor="@color/button_color"
         android:textSize="20sp" />
 
     <Button
