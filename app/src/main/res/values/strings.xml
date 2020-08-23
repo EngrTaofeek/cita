@@ -35,4 +35,9 @@
     <string name="appointment"><![CDATA[Appointment & Schedules]]></string>
     <string name="check_box_facilitate_login">Sign in as facilitator</string>
     <string name="check_box_facilitator_register">Sign up as a Facilitator</string>
+    <string name="hint_facility_name">Name of Facility</string>
+    <string name="hint_email_address">email address</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_other_equipments">Others not included in the list(Optional)</string>
 </resources>

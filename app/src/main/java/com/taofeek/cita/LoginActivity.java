@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,14 +17,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.taofeek.cita.customer.UserEditActivity;
 import com.taofeek.cita.organization.FacilityHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,12 +44,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        mEmail = (EditText) findViewById(R.id.email);
-        mPassword = (EditText) findViewById(R.id.password);
+        mEmail = (EditText) findViewById(R.id.email_input);
+        mPassword = (EditText) findViewById(R.id.password_input);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
 
-        Button signIn = (Button) findViewById(R.id.loginbutton);
+        Button signIn = (Button) findViewById(R.id.button);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void signInMethod (String email, String password){
+    public void signInMethod (final String email, String password){
         final CheckBox checkBox = findViewById(R.id.login_check_box);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -134,6 +133,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("email_id", email); //InputString: from the EditText
+                            editor.apply();
                             hideDialog();
                             Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
                             Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);

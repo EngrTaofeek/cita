@@ -1,8 +1,8 @@
 package com.taofeek.cita.customer;
 
 public class Upload {
-    private String mName;
-    private String mImageUrl;
+    private String name;
+    private String imageurl;
     public Upload() {
         //empty constructor needed
     }
@@ -10,19 +10,19 @@ public class Upload {
         if (name.trim().equals("")) {
             name = "No Name";
         }
-        mName = name;
-        mImageUrl = imageUrl;
+        this.name = name;
+        imageurl = imageUrl;
     }
     public String getName() {
-        return mName;
+        return name;
     }
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
-    public String getImageUrl() {
-        return mImageUrl;
+    public String getImageurl() {
+        return imageurl;
     }
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 }

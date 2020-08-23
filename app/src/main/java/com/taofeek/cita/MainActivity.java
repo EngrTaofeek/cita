@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
         checkAuthenticationState();
-        TextView testtext = findViewById(R.id.test_textview);
+
 
 
 
