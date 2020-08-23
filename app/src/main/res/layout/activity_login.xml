@@ -141,7 +141,7 @@
         android:textColor="@color/button_color"
 
         android:text="@string/createNewAccount"
-        android:textColor="#120A8F"
+
 
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"

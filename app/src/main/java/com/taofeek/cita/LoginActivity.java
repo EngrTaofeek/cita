@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView testing = findViewById(R.id.forgot_password);
+        TextView testing = findViewById(R.id.forgotPassword);
 
 
     }
