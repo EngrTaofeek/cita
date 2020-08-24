@@ -83,6 +83,7 @@ public class UserEditActivity extends AppCompatActivity  {
                 uploadFile();
             }
         });
+        retrieveProfilePhoto();
 
 
     }
@@ -106,7 +107,7 @@ public class UserEditActivity extends AppCompatActivity  {
         retrieveEditText("email",etemail);
         retrieveEditText("address",etaddress);
         retrieveEditText("phone",etphone);
-        retrieveProfilePhoto();
+
 
     }
 
@@ -249,6 +250,11 @@ public class UserEditActivity extends AppCompatActivity  {
                                          @Override
                                          public void onSuccess(Void aVoid) {
                                              Log.d(TAG, "DocumentSnapshot added with ID: " + data);
+                                         }
+                                     }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                         @Override
+                                         public void onSuccess(Void aVoid) {
+                                             retrieveProfilePhoto();
                                          }
                                      }).addOnFailureListener(new OnFailureListener() {
                                          @Override
