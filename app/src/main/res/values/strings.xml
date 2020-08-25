@@ -14,6 +14,10 @@
     <string name="menu_gallery">Gallery</string>
     <string name="sign_up"> Sign Up </string>
     <string name="log_header"> Log In</string>
+    <string name="userName"> Username</string>
+    <string name="address"> Address </string>
+    <string name="phone"> Phone No</string>
+    <string name="save"> Save</string>
     <string name="log_in"> Log in</string>
     <string name="email"> Email</string>
     <string name="createNewAccount"> Create new account? </string>
