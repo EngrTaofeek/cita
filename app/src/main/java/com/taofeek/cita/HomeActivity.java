@@ -1,14 +1,24 @@
 package com.taofeek.cita;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 import com.taofeek.cita.R;
 import com.taofeek.cita.customer.UserEditActivity;
 
@@ -25,6 +35,9 @@ import androidx.appcompat.widget.Toolbar;
 public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    public ImageView mImageView;
+    public TextView mNameTextView;
+    public TextView mEmailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +54,10 @@ public class HomeActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        View hView =  navigationView.getHeaderView(0);
+        mImageView = hView.findViewById(R.id.nav_image_view);
+        mNameTextView = hView.findViewById(R.id.nav_header_title);
+        mEmailTextView = hView.findViewById(R.id.nav_email);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -54,6 +71,13 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(editIntent);
 
                         break;
+                    case R.id.nav_log_out:
+                        FirebaseAuth.getInstance().signOut();
+                        Intent signOutIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(signOutIntent);
+
+
+
                     default:
                         return true;
                 }
@@ -64,6 +88,51 @@ public class HomeActivity extends AppCompatActivity {
 
                 }
 
+    @Override
+    protected void onStart() {
+        retrieveNavHeader();
+
+        super.onStart();
+    }
+
+    private void retrieveNavHeader() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+        final String data = prefs.getString("email_id", "default_email");
+
+        mEmailTextView.setText(data);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document("details").collection("profile")
+                .document(data).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if ( document.exists()) {
+                        String field = document.getString("image_url");
+                        Picasso.get().load(field).into(mImageView);
+                    }
+                }
+            }
+        });db.collection("users").document("details").collection("profile")
+                .document(data).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if ( document.exists()) {
+                        String field = document.getString("name");
+                        mNameTextView.setText(field);
+                    }
+                }
+            }
+        });
+
+
+
+        // Picasso.get().load(mImageUri).into(mImageView);
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

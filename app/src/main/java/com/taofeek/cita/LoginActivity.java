@@ -80,14 +80,14 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-        TextView resendVerification = findViewById(R.id.resend_verification_email);
+        /*TextView resendVerification = findViewById(R.id.resend_verification_email);
         resendVerification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendVerificationEmail();
 
             }
-        });
+        });*/
 
         TextView testing = findViewById(R.id.forgotPassword);
 

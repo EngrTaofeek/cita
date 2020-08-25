@@ -132,7 +132,7 @@ public class UserEditActivity extends AppCompatActivity  {
 
 
 
-        Picasso.get().load(mImageUri).into(mImageView);
+       // Picasso.get().load(mImageUri).into(mImageView);
 
     }
 
