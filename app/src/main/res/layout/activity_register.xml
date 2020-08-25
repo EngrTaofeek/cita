@@ -15,7 +15,6 @@
         android:fontFamily="@font/playfair_display"
         android:gravity="center"
         android:text="@string/sign_up"
-
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="64sp"
@@ -24,8 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-light"/>
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
