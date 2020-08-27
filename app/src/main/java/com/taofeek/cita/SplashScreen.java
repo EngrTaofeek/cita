@@ -17,6 +17,9 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         imageView = findViewById(R.id.splash_image);
         // splash screen to open the Main Activity
