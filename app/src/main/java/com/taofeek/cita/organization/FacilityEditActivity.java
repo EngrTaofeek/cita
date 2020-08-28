@@ -109,7 +109,8 @@ public class FacilityEditActivity extends AppCompatActivity {
         String capacity = getEditText(inputCapacity);
         String others = getEditText(inputOthers);
         int capacity_int = Integer.parseInt(capacity);
-        int permissible_capacity = (int) (capacity_int * 0.5);
+        int permissible_capacity_int = (int) (capacity_int * 0.5);
+        String permissible_capacity = Integer.toString(permissible_capacity_int);
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // Create a new user with a first and last name
@@ -173,13 +174,14 @@ public class FacilityEditActivity extends AppCompatActivity {
                             fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Uri image_url = uri;
+                                    Uri image_uri = uri;
 //                                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
 //                                    final String data = prefs.getString("email_id", "default_email");
                                     // Create a new user with a first and last name
 
                                     Map<String, Object> user = new HashMap<>();
-                                    user.put("image_url", image_url.toString());
+                                    String image_url = image_uri.toString();
+                                    user.put("image_url", image_url);
                                     mDb.collection("facility_details").document("details").collection("profile")
                                             .document(mEmail).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
