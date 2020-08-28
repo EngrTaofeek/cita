@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.R;
 import com.taofeek.cita.customer.UserEditActivity;
+import com.taofeek.cita.organization.FacilityHomeActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -75,7 +76,15 @@ public class HomeActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         Intent signOutIntent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(signOutIntent);
-
+                        break;
+                    case R.id.nav_gym:
+                        Intent user_activity = new Intent(HomeActivity.this, FacilityListDisplay.class);
+                        startActivity(user_activity);
+                        break;
+                    case R.id.nav_switch_to_facility:
+                        Intent facility_switch = new Intent(HomeActivity.this, FacilityHomeActivity.class);
+                        startActivity(facility_switch);
+                        break;
 
 
                     default:

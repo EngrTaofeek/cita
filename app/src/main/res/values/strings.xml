@@ -30,7 +30,7 @@
     <string name="title_activity_organiztaion">OrganiztaionActivity</string>
     <string name="nav_edit_profile">Edit Profile</string>
     <string name="nav_schedule">See schedule</string>
-    <string name="nav_gym">Check available gym</string>
+    <string name="nav_gym">Available sport facilities</string>
     <string name="nav_facility">Sign in as facility</string>
     <string name="nav_user_activity">Activity and History</string>
     <string name="settings">Settings</string>
