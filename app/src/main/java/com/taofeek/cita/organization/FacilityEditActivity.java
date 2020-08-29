@@ -110,7 +110,7 @@ public class FacilityEditActivity extends AppCompatActivity {
         String others = getEditText(inputOthers);
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
-        String permissible_capacity = Integer.toString(permissible_capacity_int);
+        String permissible_capacity = String.valueOf(permissible_capacity_int);
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // Create a new user with a first and last name

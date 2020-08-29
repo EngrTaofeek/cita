@@ -8,7 +8,7 @@ public class FacilityDataModel {
     private String overview;
     private String capacity;
     private String others;
-    private String permissible_capacity;
+    private Long permissible_capacity;
 
     private String image_url;
 
@@ -16,7 +16,7 @@ public class FacilityDataModel {
         //empty constructor
     }
     public FacilityDataModel (String name,String address, String email, String phone, String overview, String capacity,
-                              String others, String permissible_capacity, String image_url){
+                              String others, Long permissible_capacity, String image_url){
         this.address = address;
         this.capacity = capacity;
         this.email = email;
@@ -57,7 +57,7 @@ public class FacilityDataModel {
         return others;
     }
 
-    public String getPermissible_capacity() {
+    public Long getPermissible_capacity() {
         return permissible_capacity;
     }
 
