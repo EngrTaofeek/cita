@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_height="150dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_home_24" />
+                app:srcCompat="@drawable/stadium" />
 
             <TextView
                 android:id="@+id/list_name"
@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:textSize="20sp"
                 android:text="@string/hint_facility_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintStart_toEndOf="@+id/list_picture"
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="75dp"
                 android:layout_marginLeft="75dp"
+                android:isIndicator="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_picture" />
 
@@ -56,7 +58,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="BOOK NOW"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_background"
+                android:text="Book Now"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
