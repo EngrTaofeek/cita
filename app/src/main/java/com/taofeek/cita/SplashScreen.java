@@ -8,6 +8,21 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+/*
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nav_image_view"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/nav_header_desc"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/stadium"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/color_gold"*/
 
 public class SplashScreen extends AppCompatActivity {
     private ImageView imageView;
