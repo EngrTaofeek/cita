@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 /*
     xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/nav_image_view"
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 public class SplashScreen extends AppCompatActivity {
     private ImageView imageView;
     private static int splashTimeOut = 5000;
+    Animation animBlink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,15 @@ public class SplashScreen extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        imageView = findViewById(R.id.splash_image);
+
+        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.blink);
+        TextView splash_title = findViewById(R.id.splash_cita);
+        TextView splash_motto = findViewById(R.id.splash_motto);
+        splash_title.startAnimation(animBlink);
+        splash_motto.startAnimation(animBlink);
+
+       // imageView = findViewById(R.id.splash_image);
         // splash screen to open the Main Activity
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -47,7 +57,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         }, splashTimeOut);
         // create the animation
-        Animation myAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splashanimation);
-        imageView.startAnimation(myAnim);
+//        Animation myAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splashanimation);
+//        imageView.startAnimation(myAnim);
     }
 }
