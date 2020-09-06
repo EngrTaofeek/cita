@@ -40,11 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         mEmail = (EditText) findViewById(R.id.email_input);
         mPassword = (EditText) findViewById(R.id.password_input);
         mConfirmPassword = (EditText) findViewById(R.id.confirm_password_input);
         mRegister = (Button) findViewById(R.id.button);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        hideDialog();
 
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override

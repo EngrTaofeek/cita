@@ -32,7 +32,7 @@
     <string name="nav_edit_profile">Edit Profile</string>
     <string name="nav_schedule">See schedule</string>
     <string name="nav_gym">Available sport facilities</string>
-    <string name="nav_facility">Sign in as facility</string>
+    <string name="nav_facility">Sign in as facilitator</string>
     <string name="nav_user_activity">Activity and History</string>
     <string name="settings">Settings</string>
     <string name="log_out">Sign out</string>
@@ -53,4 +53,5 @@
     <string name="stay_fit">Stay Fit! Stay Safe!</string>
     <string name="stayfit_paragragph">At Cita we aim to help our users use sport facilities and gyms while adhering to the necessary covid-19 guidelines. We have put in place mechanisms for sport facilities to ensure the health and safety of our users. \n Our rules for facilities include:</string>
     <string name="expectation_question">What to expect from us?</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
