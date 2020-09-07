@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.squareup.picasso.Picasso;
+
+import static java.security.AccessController.getContext;
 
 class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, FacilityAdapter.FacilityHolder> {
 
@@ -30,8 +33,13 @@ class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, Facili
         holder.name.setText(model.getName());
         holder.email.setText(model.getEmail());
         holder.address.setText(model.getAddress());
+        if(model.getImage_url() !=null){
+            Picasso.get().load(model.getImage_url()).into(holder.profile);
+        }
 
-    }
+
+
+        }
 
     @NonNull
     @Override
