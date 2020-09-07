@@ -16,7 +16,8 @@
     <string name="sign_up"> Sign Up </string>
     <string name="log_header"> Log In</string>
     <string name="userName"> Username</string>
-    <string name="address"> Address </string>
+    <string name="address">Address</string>
+    <string name="address_column">Address:</string>
     <string name="phone"> Phone No</string>
     <string name="save"> Save</string>
     <string name="log_in"> Log in</string>
@@ -54,4 +55,9 @@
     <string name="stayfit_paragragph">At Cita we aim to help our users use sport facilities and gyms while adhering to the necessary covid-19 guidelines. We have put in place mechanisms for sport facilities to ensure the health and safety of our users. \n Our rules for facilities include:</string>
     <string name="expectation_question">What to expect from us?</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="email_column">email:</string>
+    <string name="phone_colon">Phone:</string>
+    <string name="overview_colon">Overview:</string>
+    <string name="capacity_colon">Capacity:</string>
+    <string name="others_colon">Others:</string>
 </resources>
