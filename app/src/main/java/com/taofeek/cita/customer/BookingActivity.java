@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.HomeActivity;
 import com.taofeek.cita.R;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 
 public class BookingActivity extends AppCompatActivity {
     public static final String emailItem = "facility_email";
@@ -52,8 +56,17 @@ public class BookingActivity extends AppCompatActivity {
         populateTextView("overview",overview);
         populateTextView("capacity",capacity);
         populateTextView("others",others);
-
-
+        LinearLayout book_layout = findViewById(R.id.booking_layout);
+        book_layout.setVisibility(View.GONE);
+        bookNow = findViewById(R.id.button_book);
+        bookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(book_layout.getVisibility() == View.GONE){
+                    book_layout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
     private void populateProfilePhoto() {
@@ -101,5 +114,6 @@ public class BookingActivity extends AppCompatActivity {
 
 
     }
+
 
 }
