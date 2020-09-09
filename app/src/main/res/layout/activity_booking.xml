@@ -288,7 +288,7 @@
                         android:layout_marginRight="16dp"
                         android:text="Choose date for booking."
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="24sp"
+                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/imageView8"
