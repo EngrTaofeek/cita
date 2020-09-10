@@ -94,24 +94,16 @@
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/spinner_sport_activities"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/text_input_address"
-            app:layout_constraintStart_toStartOf="@+id/text_input_address"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_address" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_others"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:hint="@string/hint_other_equipments"
-            app:layout_constraintEnd_toEndOf="@+id/spinner_sport_activities"
-            app:layout_constraintStart_toStartOf="@+id/spinner_sport_activities"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_sport_activities">
+            app:layout_constraintEnd_toEndOf="@+id/text_input_address"
+            app:layout_constraintStart_toStartOf="@+id/text_input_address"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_address">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
