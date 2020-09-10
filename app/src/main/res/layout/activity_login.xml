@@ -11,17 +11,17 @@
         android:id="@+id/logIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="100dp"
-        android:textColor="#000000"
-        android:textSize="64sp"
         android:fontFamily="@font/playfair_display"
-        android:text="@string/log_header"
-        android:textStyle="normal"
+        android:gravity="center"
+        android:text="@string/app_name"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:textColor="@color/darkblack"
+        android:textSize="64sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/create_account"

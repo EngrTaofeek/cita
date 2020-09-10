@@ -286,9 +286,10 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:text="Choose date for booking."
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="12sp"
+                        android:text="@string/booking_date_hint"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/darkblack"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -326,7 +327,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:text="Choose time for booking."
+                        android:text="@string/booking_time_hint"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -335,6 +336,20 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/button_book_confirmation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/button_background"
+                android:text="CONFIRM BOOKING"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

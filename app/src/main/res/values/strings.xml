@@ -60,4 +60,6 @@
     <string name="overview_colon">Overview:</string>
     <string name="capacity_colon">Capacity:</string>
     <string name="others_colon">Others:</string>
+    <string name="booking_time_hint">Choose time for booking.</string>
+    <string name="booking_date_hint">Choose date for booking.</string>
 </resources>

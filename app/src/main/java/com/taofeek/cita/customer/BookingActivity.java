@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
-import android.app.DatePickerDialog;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,36 +21,44 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.HomeActivity;
 import com.taofeek.cita.R;
-import com.taofeek.cita.time.DatePickerFragment;
 
+import com.taofeek.cita.time.DatePickerFragment;
 import com.taofeek.cita.time.TimePickerFragment;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BookingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class BookingActivity extends AppCompatActivity implements  TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     public static final String emailItem = "facility_email";
-    public String mEmail;
+    public String mEmail ,mStrHrsToShow,mCurrentDateString, mUserMail;
     public ImageView profile ;
-    public TextView title, address, email, phone, overview, capacity, others;
+    public TextView title, address, email, phone, overview, capacity, others, mTextViewTime, mTextViewDate;
     public Button bookNow, buttonDirection;
     final Calendar calendar=Calendar.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private LinearLayout mBook_layout;
+    private String mCompleteTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-        //Intent intent = getIntent();
-        //mEmail = intent.getParcelableExtra(emailItem);
+        SharedPreferences prefs_user = PreferenceManager.getDefaultSharedPreferences(BookingActivity.this);
+        mUserMail = prefs_user.getString("email_id", "default_email");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(BookingActivity.this);
         final String data = prefs.getString("facility_item_id", "teslim@yahoo.com");
         mEmail = data;
@@ -70,14 +78,14 @@ public class BookingActivity extends AppCompatActivity implements DatePickerDial
         populateTextView("overview",overview);
         populateTextView("capacity",capacity);
         populateTextView("others",others);
-        LinearLayout book_layout = findViewById(R.id.booking_layout);
-        book_layout.setVisibility(View.GONE);
+        mBook_layout = findViewById(R.id.booking_layout);
+        mBook_layout.setVisibility(View.GONE);
         bookNow = findViewById(R.id.button_book);
         bookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(book_layout.getVisibility() == View.GONE){
-                    book_layout.setVisibility(View.VISIBLE);
+                if(mBook_layout.getVisibility() == View.GONE){
+                    mBook_layout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -86,7 +94,8 @@ public class BookingActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+                datePicker.show(getSupportFragmentManager(),"date picker");
+
             }
         });
         CardView time_item = findViewById(R.id.card_view_time_picker);
@@ -98,8 +107,41 @@ public class BookingActivity extends AppCompatActivity implements DatePickerDial
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
+        Button buttonConfirmation = findViewById(R.id.button_book_confirmation);
+        buttonConfirmation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(mTextViewDate.equals(getString(R.string.booking_date_hint))) && !(mTextViewTime.equals(getString(R.string.booking_time_hint))) ) {
+                    sendAppointmentToFacilitator();
+                }
+                else {
+
+                    Snackbar.make(mBook_layout,"Unable to book appointment, try selecting another date/time", Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        }
+
+    private void sendAppointmentToFacilitator() {
+        Map<String, Object> user = new HashMap<>();
+        user.put("time", mCompleteTime );
+        user.put("email", mUserMail);
+        user.put("date", mCurrentDateString);
+        db.collection("facility_details").document("details").collection("appointment").document(mUserMail)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
+
+
+                    }
+                });
+
 
     }
+
     private void populateProfilePhoto() {
 
 
@@ -150,20 +192,8 @@ public class BookingActivity extends AppCompatActivity implements DatePickerDial
 
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        TextView textView = findViewById(R.id.date_text);
-        calendar.set(Calendar.YEAR,year);
-        calendar.set(Calendar.MONTH,month);
-        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd");
-        textView.setText(simpleDateFormat.format(calendar.getTime()));
-
-
-    }
-
-    @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        TextView textView = (TextView) findViewById(R.id.time_text);
+        mTextViewTime = (TextView) findViewById(R.id.time_text);
         String am_pm = "";
 
         Calendar datetime = Calendar.getInstance();
@@ -175,7 +205,19 @@ public class BookingActivity extends AppCompatActivity implements DatePickerDial
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
 
-        String strHrsToShow = (datetime.get(Calendar.HOUR) == 0) ?"12":datetime.get(Calendar.HOUR)+"";
-        textView.setText(strHrsToShow+":"+datetime.get(Calendar.MINUTE)+" "+am_pm );
+        mStrHrsToShow = (datetime.get(Calendar.HOUR) == 0) ?"12":datetime.get(Calendar.HOUR)+"";
+        mCompleteTime = mStrHrsToShow +":"+datetime.get(Calendar.MINUTE)+" "+am_pm;
+        mTextViewTime.setText(mCompleteTime);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        mCurrentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        mTextViewDate = (TextView) findViewById(R.id.date_text);
+        mTextViewDate.setText(mCurrentDateString);
     }
 }
