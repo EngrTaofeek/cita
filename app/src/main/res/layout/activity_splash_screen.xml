@@ -11,6 +11,7 @@
         android:id="@+id/splash_cita"
         android:layout_width="wrap_content"
         android:layout_height="112sp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="@font/playfair_display"
         android:text="cita"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"

@@ -122,7 +122,7 @@ public class FacilityEditActivity extends AppCompatActivity {
         user.put("others", others);
         user.put("overview", overview);
         user.put("capacity", capacity);
-        user.put("permissible_capacity", permissible_capacity);
+        user.put("permissible_capacity", permissible_capacity_int);
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
         final String data = prefs.getString("email_id", "default_email");*/
 

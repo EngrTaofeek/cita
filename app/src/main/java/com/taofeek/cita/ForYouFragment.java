@@ -76,7 +76,7 @@ public class ForYouFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_for_you, container, false);
-        Query query = detailsRef.orderBy("name", Query.Direction.DESCENDING);
+        Query query = detailsRef.orderBy("name", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<FacilityDataModel> options = new FirestoreRecyclerOptions.Builder<FacilityDataModel>()
                 .setQuery(query, FacilityDataModel.class)

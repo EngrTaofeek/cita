@@ -27,7 +27,7 @@ public class FacilityListDisplay extends AppCompatActivity {
         setUpRecyclerView();
     }
     private void setUpRecyclerView() {
-        Query query = detailsRef.orderBy("name", Query.Direction.DESCENDING);
+        Query query = detailsRef.orderBy("name", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<FacilityDataModel> options = new FirestoreRecyclerOptions.Builder<FacilityDataModel>()
                 .setQuery(query, FacilityDataModel.class)
