@@ -11,7 +11,7 @@
         android:id="@+id/logIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/playfair_display"
         android:gravity="center"
         android:text="@string/app_name"
@@ -160,6 +160,26 @@
         app:layout_constraintTop_toBottomOf="@id/password_input"
         android:layout_marginTop="10dp"/>
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="or Sign in with Google"
+        android:textColor="@color/button_color"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/link_register" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

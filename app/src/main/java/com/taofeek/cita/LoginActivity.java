@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -17,6 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     // widgets
     private EditText mEmail, mPassword;
     private ProgressBar mProgressBar;
-
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
+    private CheckBox mCheckBox;
 
 
     @Override
@@ -51,8 +60,10 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.password_input);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
+        mCheckBox = findViewById(R.id.login_check_box);
 
         Button signIn = (Button) findViewById(R.id.button);
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +104,15 @@ public class LoginActivity extends AppCompatActivity {
         });*/
 
         TextView testing = findViewById(R.id.forgotPassword);
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+        preGoogleSignInSetUp();
 
 
     }
@@ -103,7 +123,63 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
+        // Check for existing Google Sign In account, if the user is already signed in
+// the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+       // updateUI(account);
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
+            if (acct != null) {
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String email = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto = acct.getPhotoUrl();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("email_id", email); //InputString: from the EditText
+                editor.apply();
+            }
+
+
+            Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);
+            if (mCheckBox.isChecked()){
+                hideDialog();
+                startActivity(facility_intent);
+                finish();
+            }
+            else {
+                hideDialog();
+                startActivity(user_intent);
+                finish();
+
+            }
+
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+
+        }
     }
     public void sendVerificationEmail() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -126,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signInMethod (final String email, String password){
-        final CheckBox checkBox = findViewById(R.id.login_check_box);
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -143,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
                             hideDialog();
                             Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
                             Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);
-                            if (checkBox.isChecked()){
+                            if (mCheckBox.isChecked()){
                                 startActivity(facility_intent);
                                 finish();
                             }
@@ -173,6 +249,21 @@ public class LoginActivity extends AppCompatActivity {
     private void showDialog(){
         mProgressBar.setVisibility(View.VISIBLE);
 
+    }
+    public void preGoogleSignInSetUp(){
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        // Set the dimensions of the sign-in button.
+
+    }
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private void hideDialog(){

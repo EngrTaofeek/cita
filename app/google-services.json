@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "573506764421-c5h0c4rokdbcmq5lhfkc550a01eudkd9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.taofeek.cita",
+            "certificate_hash": "9b6eeab45286a1c7b376814be66144ebec289ef8"
+          }
+        },
+        {
           "client_id": "573506764421-nh816r1215sa88mfs13o34plv3699elh.apps.googleusercontent.com",
           "client_type": 3
         }
