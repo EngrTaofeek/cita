@@ -3,6 +3,7 @@ package com.taofeek.cita.customer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
@@ -17,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -87,6 +89,17 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
                 if(mBook_layout.getVisibility() == View.GONE){
                     mBook_layout.setVisibility(View.VISIBLE);
                 }
+                if(bookNow.getVisibility() == View.VISIBLE){
+                    bookNow.setVisibility(View.GONE);
+                    final NestedScrollView scrollview = ((NestedScrollView) findViewById(R.id.scrollViewBook));
+                    scrollview.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+                        }
+                    });
+                }
+
             }
         });
         CardView date_item = findViewById(R.id.card_view_date_picker);
