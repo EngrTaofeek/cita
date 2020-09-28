@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView testing = findViewById(R.id.forgotPassword);
         SignInButton signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = acct.getEmail();
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
+                FirebaseUser user = mAuth.getCurrentUser();
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("email_id", email); //InputString: from the EditText
