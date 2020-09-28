@@ -94,16 +94,15 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /*TextView resendVerification = findViewById(R.id.resend_verification_email);
-        resendVerification.setOnClickListener(new View.OnClickListener() {
+
+
+        TextView forgotPassword = findViewById(R.id.forgotPassword);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendVerificationEmail();
-
+                forgotPassword();
             }
-        });*/
-
-        TextView testing = findViewById(R.id.forgotPassword);
+        });
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +264,20 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    private void forgotPassword(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String emailAddress = mEmail.getText().toString().trim();
+
+        auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+                        }
+                    }
+                });
     }
 
     private void hideDialog(){

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,8 +36,6 @@ import static android.text.TextUtils.isEmpty;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
-
-    //private static final String DOMAIN_NAME = "tabian.ca";
 
     //widgets
     private EditText mEmail, mPassword, mConfirmPassword;
