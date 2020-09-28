@@ -11,7 +11,7 @@
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/playfair_display"
         android:gravity="center"
         android:text="@string/app_name"
@@ -35,34 +35,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <TextView
         android:id="@+id/create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUp"
-        android:layout_marginTop="25dp"
-        android:textAlignment="center"
+        android:layout_marginTop="8dp"
         android:gravity="center"
+        android:text="@string/create_account"
+        android:textAlignment="center"
         android:textColor="@color/button_color"
         android:textSize="25sp"
         android:textStyle="normal"
-        android:text="@string/create_account"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUp" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/create_account"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/email"
         android:textColor="@color/button_color"
         android:textSize="20sp"
-        android:text="@string/email"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_account" />
 
     <EditText
         android:id="@+id/email_input"
@@ -149,18 +148,38 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkbox"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginTop="40dp"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
+        android:background="@drawable/button_background"
         android:text="@string/sign_up"
         android:textAllCaps="false"
-        android:background="@drawable/button_background"/>
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox" />
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="or Sign in with Google"
+        android:textColor="@color/button_color"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 
 
