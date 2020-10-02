@@ -1,9 +1,7 @@
 package com.taofeek.cita.organization;
 
 public class ScheduleDataModel {
-
-
-    private String name, date, time, email;
+    private String date, time, email;
 
     public String getDate() {
         return date;
@@ -22,14 +20,10 @@ public class ScheduleDataModel {
         //EMPTY CONSTRUCTOR
 
     }
-    public String getName() {
-        return name;
-    }
-    public ScheduleDataModel(String date, String time, String email , String name){
+    public ScheduleDataModel(String date, String time, String email){
         this.date = date;
         this.time = time;
         this.email = email;
-        this.name = name;
     }
 
 
