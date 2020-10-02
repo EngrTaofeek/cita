@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".organization.FacilitatorScheduleFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/schedule_list_item" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
