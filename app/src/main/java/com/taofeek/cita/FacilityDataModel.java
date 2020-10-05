@@ -6,7 +6,11 @@ public class FacilityDataModel {
     private String email;
     private String phone;
     private String overview;
-    private String capacity;
+    private int capacity;
+
+
+
+    private int permissible_capacity;
     private String others;
 
     private String image_url;
@@ -14,8 +18,8 @@ public class FacilityDataModel {
     public FacilityDataModel() {
         //empty constructor
     }
-    public FacilityDataModel (String name,String address, String email, String phone, String overview, String capacity,
-                              String others,  String image_url){
+    public FacilityDataModel (String name,String address, String email, String phone, String overview, int capacity,
+                              int permissible_capacity, String others,  String image_url){
         this.address = address;
         this.capacity = capacity;
         this.email = email;
@@ -23,7 +27,7 @@ public class FacilityDataModel {
         this.others = others;
         this.overview = overview;
         this.name = name;
-        //this.permissible_capacity = permissible_capacity;
+        this.permissible_capacity = permissible_capacity;
         this.phone = phone;
 
     }
@@ -48,12 +52,15 @@ public class FacilityDataModel {
         return overview;
     }
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
     public String getOthers() {
         return others;
+    }
+    public int getPermissible_capacity() {
+        return permissible_capacity;
     }
 
 //    //public Long getPermissible_capacity() {

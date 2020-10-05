@@ -40,6 +40,7 @@ class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, Facili
         holder.email.setText(model.getEmail());
         holder.address.setText(model.getAddress());
         holder.email_text = model.getEmail();
+        holder.facility_name = model.getName();
         if(model.getImage_url() !=null){
             Picasso.get().load(model.getImage_url()).into(holder.profile);
         }
@@ -63,7 +64,7 @@ class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, Facili
         TextView address;
         ImageView profile;
         Button book_button;
-        public String email_text;
+        public String email_text,facility_name;
         public FacilityHolder(@NonNull final View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.list_name);
@@ -80,7 +81,8 @@ class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, Facili
                     //intent.putExtra(BookingActivity.emailItem, email_text);
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("facility_item_id", email_text); //InputString: from the EditText
+                    editor.putString("facility_item_id", email_text);
+                    editor.putString("facility_item_name", facility_name);//InputString: from the EditText
                     editor.apply();
                     mContext.startActivity(intent);
                 }

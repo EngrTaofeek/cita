@@ -39,11 +39,13 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
 
     @Override
     protected void onBindViewHolder(@NonNull com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder holder, int position, @NonNull ScheduleDataModel model) {
+        int num = position + 1;
+        String pos = String.valueOf(num);
         holder.name.setText(model.getName());
         holder.email.setText(model.getEmail());
         holder.time.setText(model.getTime());
         holder.date.setText(model.getDate());
-        holder.number.setText(position + 1);
+        holder.number.setText(pos);
 
 
 
@@ -55,7 +57,7 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
     @NonNull
     @Override
     public ScheduleAdapter.ScheduleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.facility_list_item,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_list_item,
                 parent, false);
         return new com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder(v);
     }

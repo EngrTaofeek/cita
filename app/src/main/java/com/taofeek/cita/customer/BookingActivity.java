@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -45,7 +46,7 @@ import java.util.Map;
 
 public class BookingActivity extends AppCompatActivity implements  TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     public static final String emailItem = "facility_email";
-    public String mEmail ,mStrHrsToShow,mCurrentDateString, mUserMail;
+    public String mEmail, mFacilityTitle ,mStrHrsToShow,mCurrentDateString, mUserMail,mConsumerName;
     public ImageView profile ;
     public TextView title, address, email, phone, overview, capacity, others, mTextViewTime, mTextViewDate;
     public Button bookNow, buttonDirection;
@@ -61,6 +62,8 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
         setContentView(R.layout.activity_booking);
         SharedPreferences prefs_user = PreferenceManager.getDefaultSharedPreferences(BookingActivity.this);
         mUserMail = prefs_user.getString("email_id", "default_email");
+        mConsumerName = prefs_user.getString("consumer_name","USER");
+        mFacilityTitle = prefs_user.getString("facility_item_name", "Facility");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(BookingActivity.this);
         final String data = prefs.getString("facility_item_id", "teslim@yahoo.com");
         mEmail = data;
@@ -140,18 +143,35 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
         Map<String, Object> user = new HashMap<>();
         user.put("time", mCompleteTime );
         user.put("email", mUserMail);
+        user.put("name", mConsumerName);
         user.put("date", mCurrentDateString);
-        db.collection("facility_details").document("details").collection("appointment").document(mUserMail)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
+        db.collection("facility_details").document("details").collection("appointment").
+                document("facilitator").collection(mEmail).add(user)
+               .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                   @Override
+                   public void onSuccess(DocumentReference documentReference) {
+                       Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
 
+                   }
+               });
+
+
+    }
+    private void saveUserSchedule(){
+        Map<String, Object> user = new HashMap<>();
+        user.put("time", mCompleteTime );
+        user.put("email", mUserMail);
+        user.put("name", mFacilityTitle);
+        user.put("date", mCurrentDateString);
+        db.collection("facility_details").document("details").collection("appointment").
+                document("facilitator").collection(mEmail).add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
 
                     }
                 });
-
 
     }
 
@@ -192,6 +212,7 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
                         String field = document.getString(key);
                         textView.setText(field);
 
+
                     }
                 }
             }
@@ -200,6 +221,7 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
 
 
     }
+
 
 
 

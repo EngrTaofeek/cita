@@ -131,7 +131,8 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
             }
-        });db.collection("users").document("details").collection("profile")
+        });
+        db.collection("users").document("details").collection("profile")
                 .document(data).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -140,6 +141,10 @@ public class HomeActivity extends AppCompatActivity {
                     if ( document.exists()) {
                         String field = document.getString("name");
                         mNameTextView.setText(field);
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("consumer_name", field); //InputString: from the EditText
+                        editor.apply();
                     }
                 }
             }

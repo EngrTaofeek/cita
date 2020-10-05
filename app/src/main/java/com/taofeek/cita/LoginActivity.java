@@ -108,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                showDialog();
                 signIn();
             }
         });
@@ -152,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
                 FirebaseUser user = mAuth.getCurrentUser();
+
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("email_id", email); //InputString: from the EditText

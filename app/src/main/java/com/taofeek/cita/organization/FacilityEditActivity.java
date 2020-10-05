@@ -42,7 +42,7 @@ public class FacilityEditActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri mImageUri;
     private StorageTask mUploadTask;
-    private StorageReference   mStorageRef;
+    private StorageReference mStorageRef;
     private ProgressBar mProgressBar;
     private FirebaseFirestore mDb;
     private String mEmail;
@@ -56,12 +56,12 @@ public class FacilityEditActivity extends AppCompatActivity {
 
         mProfileImage = findViewById(R.id.facility_profile_image);
         mProgressBar = findViewById(R.id.progress_bar);
-      mProfileImage.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              openFileChooser();
-          }
-      });
+        mProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
         Button submit_button = findViewById(R.id.facility_submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +76,14 @@ public class FacilityEditActivity extends AppCompatActivity {
         mDb = FirebaseFirestore.getInstance();
 
     }
-    public String getEditText (TextInputLayout editText){
+
+    public String getEditText(TextInputLayout editText) {
         String text = editText.getEditText().getText().toString().trim();
         return text;
     }
+
     private void openFileChooser() {
-        Intent intent = new Intent( Intent.ACTION_PICK,
+        Intent intent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
@@ -93,7 +95,7 @@ public class FacilityEditActivity extends AppCompatActivity {
         mEmail = getEditText(inputEmail);
     }
 
-    public void addTextDocuments(){
+    public void addTextDocuments() {
         TextInputLayout inputName = findViewById(R.id.text_input_facility_name);
         TextInputLayout inputEmail = findViewById(R.id.text_input_email_address);
         TextInputLayout inputAddress = findViewById(R.id.text_input_address);
@@ -110,6 +112,7 @@ public class FacilityEditActivity extends AppCompatActivity {
         String others = getEditText(inputOthers);
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
+        Log.d(TAG, "edit test " + permissible_capacity_int);
         String permissible_capacity = String.valueOf(permissible_capacity_int);
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -121,8 +124,9 @@ public class FacilityEditActivity extends AppCompatActivity {
         user.put("phone", phone);
         user.put("others", others);
         user.put("overview", overview);
-        user.put("capacity", capacity);
-        user.put("permissible_capacity", permissible_capacity_int);
+        Map<String, Object> user_int = new HashMap<>();
+        user_int.put("capacity", capacity);
+        user_int.put("permissible_capacity", permissible_capacity_int);
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
         final String data = prefs.getString("email_id", "default_email");*/
 
@@ -136,9 +140,18 @@ public class FacilityEditActivity extends AppCompatActivity {
 
                     }
                 });
+        db.collection("facility_details").document("details").collection("profile").document(mEmail)
+                .set(user_int)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+                });
 
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -148,11 +161,13 @@ public class FacilityEditActivity extends AppCompatActivity {
             Picasso.get().load(mImageUri).into(mProfileImage);
         }
     }
+
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
     private void uploadFile() {
         if (mProfileImage != null) {
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()

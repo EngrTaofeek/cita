@@ -1,22 +1,28 @@
 package com.taofeek.cita.organization;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.firestore.Query;
 
 import com.taofeek.cita.FacilityDataModel;
+import com.taofeek.cita.HomeActivity;
 import com.taofeek.cita.R;
 
 
@@ -30,10 +36,11 @@ public class FacilitatorScheduleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference detailsRef = db.collection("facility_details")
-            .document("details").collection("appointment");
+
     private ScheduleAdapter adapter;
+
 
     public FacilitatorScheduleFragment() {
         // Required empty public constructor
@@ -61,8 +68,17 @@ public class FacilitatorScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final String data = prefs.getString("email_id", "default_email");
+        String mEmail = data;
+
+        CollectionReference detailsRef = db.collection("facility_details").document("details").collection("appointment").
+                document("facilitator").collection(mEmail);
+
+
         View v = inflater.inflate(R.layout.fragment_facilitator_schedule, container, false);
-        Query query = detailsRef.orderBy("name", Query.Direction.ASCENDING);
+        Query query = detailsRef.orderBy("email", Query.Direction.ASCENDING);
+
 
         FirestoreRecyclerOptions<ScheduleDataModel> options = new FirestoreRecyclerOptions.Builder<ScheduleDataModel>()
                 .setQuery(query, ScheduleDataModel.class)
@@ -75,6 +91,12 @@ public class FacilitatorScheduleFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(adapter);
+        /*if (adapter.getItemCount() >= 1){
+            ConstraintLayout empty = v.findViewById(R.id.empty_schedule);
+            empty.setVisibility(View.GONE);
+
+
+        }*/
 
         return v;
 
