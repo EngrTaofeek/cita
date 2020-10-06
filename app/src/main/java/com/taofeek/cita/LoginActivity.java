@@ -157,24 +157,31 @@ public class LoginActivity extends AppCompatActivity {
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("email_id", email); //InputString: from the EditText
+                editor.putString("email_id", email);
+                editor.putInt("login_state", 1);//InputString: from the EditText
                 editor.apply();
+
+                Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);
+                if (mCheckBox.isChecked()){
+                    hideDialog();
+                    editor.putString("login_user_state","facilitator");
+                    editor.apply();
+                    startActivity(facility_intent);
+                    finish();
+                }
+                else {
+                    editor.putString("login_user_state","consumer");
+                    editor.apply();
+                    hideDialog();
+                    startActivity(user_intent);
+                    finish();
+
+                }
             }
 
 
-            Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
-            Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);
-            if (mCheckBox.isChecked()){
-                hideDialog();
-                startActivity(facility_intent);
-                finish();
-            }
-            else {
-                hideDialog();
-                startActivity(user_intent);
-                finish();
 
-            }
 
 
         } catch (ApiException e) {
@@ -218,15 +225,21 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("email_id", email); //InputString: from the EditText
+                            editor.putInt("login_state", 1);
                             editor.apply();
                             hideDialog();
                             Intent user_intent = new Intent(LoginActivity.this, HomeActivity.class);
                             Intent facility_intent = new Intent(LoginActivity.this, FacilityHomeActivity.class);
                             if (mCheckBox.isChecked()){
+                                editor.putString("login_user_state","facilitator");
+                                editor.apply();
                                 startActivity(facility_intent);
                                 finish();
                             }
                             else {
+                                editor.putString("login_user_state","consumer");
+                                editor.apply();
+
                                 startActivity(user_intent);
                                 finish();
 

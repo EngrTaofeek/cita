@@ -221,22 +221,28 @@ public class RegisterActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("email_id", email); //InputString: from the EditText
                 editor.apply();
+
+                Intent user_intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                Intent facility_intent = new Intent(RegisterActivity.this, FacilityHomeActivity.class);
+                if (mCheckBox.isChecked()){
+                    hideDialog();
+                    editor.putString("login_user_state","facilitator");
+                    editor.apply();
+                    startActivity(facility_intent);
+                    finish();
+                }
+                else {
+                    editor.putString("login_user_state","consumer");
+                    editor.apply();
+                    hideDialog();
+                    startActivity(user_intent);
+                    finish();
+
+                }
             }
 
 
-            Intent user_intent = new Intent(RegisterActivity.this, HomeActivity.class);
-            Intent facility_intent = new Intent(RegisterActivity.this, FacilityHomeActivity.class);
-            if (mCheckBox.isChecked()){
-                hideDialog();
-                startActivity(facility_intent);
-                finish();
-            }
-            else {
-                hideDialog();
-                startActivity(user_intent);
-                finish();
 
-            }
 
 
         } catch (ApiException e) {

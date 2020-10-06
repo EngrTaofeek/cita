@@ -3,12 +3,16 @@ package com.taofeek.cita;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.taofeek.cita.organization.FacilityHomeActivity;
 /*
     xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/nav_image_view"
@@ -46,14 +50,27 @@ public class SplashScreen extends AppCompatActivity {
         splash_title.startAnimation(animBlink);
         splash_motto.startAnimation(animBlink);
 
-       // imageView = findViewById(R.id.splash_image);
+        // imageView = findViewById(R.id.splash_image);
         // splash screen to open the Main Activity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent= new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SplashScreen.this);
+                final int data = prefs.getInt("login_state", 2);
+                if (data == 1) {
+                    final String state = prefs.getString("login_user_state", "customer");
+                    if ( state == "facilitator"){
+                        Intent existing_user_facility = new Intent(SplashScreen.this, FacilityHomeActivity.class);
+                        startActivity(existing_user_facility);
+                  } else {
+                    Intent existing_user = new Intent(SplashScreen.this, HomeActivity.class);
+                    startActivity(existing_user);}
+
+                } else {
+                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }, splashTimeOut);
         // create the animation

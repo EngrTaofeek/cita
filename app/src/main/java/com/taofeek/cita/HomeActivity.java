@@ -95,6 +95,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
 
+
+
+
                     default:
                         return true;
                 }

@@ -128,7 +128,9 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
             @Override
             public void onClick(View v) {
                 if (!(mTextViewDate.equals(getString(R.string.booking_date_hint))) && !(mTextViewTime.equals(getString(R.string.booking_time_hint))) ) {
+                    saveUserSchedule();
                     sendAppointmentToFacilitator();
+
                 }
                 else {
 
@@ -145,6 +147,7 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
         user.put("email", mUserMail);
         user.put("name", mConsumerName);
         user.put("date", mCurrentDateString);
+        user.put("status", "Pending");
         db.collection("facility_details").document("details").collection("appointment").
                 document("facilitator").collection(mEmail).add(user)
                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -163,15 +166,9 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
         user.put("email", mUserMail);
         user.put("name", mFacilityTitle);
         user.put("date", mCurrentDateString);
-        db.collection("facility_details").document("details").collection("appointment").
-                document("facilitator").collection(mEmail).add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
-
-                    }
-                });
+        user.put("status", "Pending");
+        db.collection("users").document("details").collection("appointment").
+                document("user").collection(mEmail).add(user);
 
     }
 
