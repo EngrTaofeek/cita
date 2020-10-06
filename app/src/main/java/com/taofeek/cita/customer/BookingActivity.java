@@ -206,8 +206,17 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
                 if (task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
-                        String field = document.getString(key);
-                        textView.setText(field);
+                        if ( key == "capacity"){
+                            Long capacity = document.getLong(key);
+                            String book_capaccity = capacity.toString().trim();
+
+                            textView.setText(book_capaccity);
+
+                        }else {
+                            String field = document.getString(key);
+
+                            textView.setText(field);
+                        }
 
 
                     }
