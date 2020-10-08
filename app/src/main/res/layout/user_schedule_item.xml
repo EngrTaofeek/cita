@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:text="status:"
+                    android:text="Status:"
                     app:layout_constraintEnd_toStartOf="@+id/schedule_picture_facility"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/schedule_name_facility"
@@ -94,7 +94,7 @@
                     app:layout_constraintTop_toTopOf="@+id/schedule_date" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/user_schedule_status"
                     android:layout_width="59dp"
                     android:layout_height="19dp"
                     android:layout_marginStart="8dp"

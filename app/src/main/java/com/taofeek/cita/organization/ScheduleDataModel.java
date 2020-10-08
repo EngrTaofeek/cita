@@ -1,7 +1,16 @@
 package com.taofeek.cita.organization;
 
 public class ScheduleDataModel {
-    private String date, time, email;
+    private String date;
+    private String time;
+    private String email;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+
 
     public String getDate() {
         return date;

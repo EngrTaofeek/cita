@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_menu_appoint"
+        android:title="Approve appointment" />
+    <item
+        android:id="@+id/item_menu_decline"
+        android:title="Decline Appointment" />
+    <item
+        android:id="@+id/item_menu_pending"
+        android:title="Leave as pending" />
+
+
+</menu>

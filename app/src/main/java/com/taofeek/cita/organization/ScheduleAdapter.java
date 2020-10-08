@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -24,7 +27,7 @@ import com.taofeek.cita.customer.BookingActivity;
 
 import static java.security.AccessController.getContext;
 
-class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder> {
+class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder> implements PopupMenu.OnMenuItemClickListener {
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -62,8 +65,10 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
         return new com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder(v);
     }
 
-    class ScheduleHolder extends RecyclerView.ViewHolder{
-        TextView name,email,time,date, number;
+
+
+    class ScheduleHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView name,email,time,date, number, status;
 
         Button book_button;
         public String email_text;
@@ -74,8 +79,39 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
             time = itemView.findViewById(R.id.schedule_time);
             date = itemView.findViewById(R.id.schedule_date);
             number = itemView.findViewById(R.id.schedule_number);
+            status = itemView.findViewById(R.id.schedule_status);
+
+            itemView.setOnClickListener(this);
 
         }
+
+        @Override
+        public void onClick(View v) {
+            showPopupMenu(v);
+        }
+
+        }
+
+        private void showPopupMenu(View view) {
+            PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+            popupMenu.inflate(R.menu.facilitator_schedule_menu);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.show();
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.item_menu_appoint:
+
+                    return true;
+                case R.id.item_menu_decline:
+                    return true;
+                case R.id.item_menu_pending:
+                    return true;
+                default:
+                    return false;
+            }
     }
 }
 
