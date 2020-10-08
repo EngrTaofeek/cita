@@ -20,14 +20,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.FacilityDataModel;
 import com.taofeek.cita.R;
 import com.taofeek.cita.customer.BookingActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static java.security.AccessController.getContext;
 
-class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder> implements PopupMenu.OnMenuItemClickListener {
+class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.taofeek.cita.organization.ScheduleAdapter.ScheduleHolder> {
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -36,6 +43,7 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
      * @param options
      */
     Context mContext;
+
     public ScheduleAdapter(@NonNull FirestoreRecyclerOptions<ScheduleDataModel> options) {
         super(options);
     }
@@ -48,11 +56,8 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
         holder.email.setText(model.getEmail());
         holder.time.setText(model.getTime());
         holder.date.setText(model.getDate());
+        holder.status.setText(model.getStatus());
         holder.number.setText(pos);
-
-
-
-
 
 
     }
@@ -66,12 +71,12 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
     }
 
 
-
-    class ScheduleHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView name,email,time,date, number, status;
+    class ScheduleHolder extends RecyclerView.ViewHolder {
+        TextView name, email, time, date, number, status;
 
         Button book_button;
         public String email_text;
+
         public ScheduleHolder(@NonNull final View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.schedule_name);
@@ -81,37 +86,56 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
             number = itemView.findViewById(R.id.schedule_number);
             status = itemView.findViewById(R.id.schedule_status);
 
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(v.getContext(), v);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.facilitator_schedule_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.item_menu_appoint:
+                                    status.setText("APPOINTED");
+                                    updateStatus("APPOINTED");
+                                    return true;
+                                case R.id.item_menu_decline:
+                                    status.setText("DECLINED");
+                                    updateStatus("DECLINED");
+                                    return true;
+                                case R.id.item_menu_pending:
+                                    status.setText("PENDING");
+                                    updateStatus("PENDING");
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+
+                }
+            });
 
         }
-
-        @Override
-        public void onClick(View v) {
-            showPopupMenu(v);
+        public void updateStatus(String status){
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(name.getContext());
+            final String data = prefs.getString("email_id", "oduola.taofeekkola@gmail.com");
+            String mEmail = data;
+            Map<String, Object> user = new HashMap<>();
+            user.put("status", status );
+            db.collection("facility_details").document("details").collection("appointment").
+                    document("facilitator").collection("schedule").document(mEmail).update(user);
+            db.collection("users").document("details").collection("appointment").
+                    document(mEmail).update(user);
         }
 
-        }
 
-        private void showPopupMenu(View view) {
-            PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-            popupMenu.inflate(R.menu.facilitator_schedule_menu);
-            popupMenu.setOnMenuItemClickListener(this);
-            popupMenu.show();
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.item_menu_appoint:
-
-                    return true;
-                case R.id.item_menu_decline:
-                    return true;
-                case R.id.item_menu_pending:
-                    return true;
-                default:
-                    return false;
-            }
     }
 }
 

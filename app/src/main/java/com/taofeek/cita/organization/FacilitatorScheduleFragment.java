@@ -73,7 +73,7 @@ public class FacilitatorScheduleFragment extends Fragment {
         String mEmail = data;
 
         CollectionReference detailsRef = db.collection("facility_details").document("details").collection("appointment").
-                document("facilitator").collection(mEmail);
+                document("facilitator").collection("schedule");
 
 
         View v = inflater.inflate(R.layout.fragment_facilitator_schedule, container, false);

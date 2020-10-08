@@ -149,14 +149,14 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
         user.put("date", mCurrentDateString);
         user.put("status", "Pending");
         db.collection("facility_details").document("details").collection("appointment").
-                document("facilitator").collection(mEmail).add(user)
-               .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                   @Override
-                   public void onSuccess(DocumentReference documentReference) {
-                       Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
+                document("facilitator").collection("schedule").document(mEmail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
 
-                   }
-               });
+            }
+        });
+
 
 
     }
@@ -168,7 +168,7 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
         user.put("date", mCurrentDateString);
         user.put("status", "Pending");
         db.collection("users").document("details").collection("appointment").
-                document("user").collection(mEmail).add(user);
+                document(mEmail).set(user);
 
     }
 
