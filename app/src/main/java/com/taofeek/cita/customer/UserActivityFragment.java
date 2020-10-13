@@ -3,12 +3,19 @@ package com.taofeek.cita.customer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.taofeek.cita.R;
+import com.taofeek.cita.organization.ScheduleDataModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +28,9 @@ public class UserActivityFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private UserActivityAdapter adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,6 +71,43 @@ public class UserActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_activity, container, false);
+        CollectionReference detailsRef =  db.collection("users")
+                .document("details").collection("appointment");
+        View v = inflater.inflate(R.layout.fragment_user_activity, container, false);
+        Query query = detailsRef.orderBy("email", Query.Direction.ASCENDING);
+
+
+        FirestoreRecyclerOptions<ActivityDataModel> options = new FirestoreRecyclerOptions.Builder<ActivityDataModel>()
+                .setQuery(query, ActivityDataModel.class)
+                .build();
+
+        adapter = new UserActivityAdapter(options);
+        RecyclerView recyclerView = v.findViewById(R.id.recycler_activity);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setAdapter(adapter);
+        /*if (adapter.getItemCount() >= 1){
+            ConstraintLayout empty = v.findViewById(R.id.empty_schedule);
+            empty.setVisibility(View.GONE);
+
+
+        }*/
+
+        return v;
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+
     }
 }

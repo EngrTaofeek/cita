@@ -2,6 +2,7 @@ package com.taofeek.cita.customer;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,9 @@ public class UserActivityAdapter extends FirestoreRecyclerAdapter<ActivityDataMo
     @NonNull
     @Override
     public UserActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_schedule_item,
+                parent, false);
+        return new UserActivityHolder(v);
     }
 
     class UserActivityHolder extends RecyclerView.ViewHolder {
@@ -59,7 +62,7 @@ public class UserActivityAdapter extends FirestoreRecyclerAdapter<ActivityDataMo
             name = itemView.findViewById(R.id.schedule_name_facility);
             time = itemView.findViewById(R.id.schedule_time);
             date = itemView.findViewById(R.id.schedule_date);
-            status = itemView.findViewById(R.id.schedule_status);
+            status = itemView.findViewById(R.id.user_schedule_status);
 
 
 
