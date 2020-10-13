@@ -25,10 +25,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
-import com.taofeek.cita.HomeActivity;
+import com.taofeek.cita.customer.HomeActivity;
 import com.taofeek.cita.LoginActivity;
 import com.taofeek.cita.R;
-import com.taofeek.cita.customer.UserEditActivity;
 import com.taofeek.cita.organization.main.SectionsPagerAdapter;
 
 public class FacilityHomeActivity extends AppCompatActivity {

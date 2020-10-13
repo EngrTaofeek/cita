@@ -1,4 +1,4 @@
-package com.taofeek.cita;
+package com.taofeek.cita.customer;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -20,17 +19,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+import com.taofeek.cita.FacilityListDisplay;
+import com.taofeek.cita.LoginActivity;
 import com.taofeek.cita.R;
-import com.taofeek.cita.customer.UserEditActivity;
 import com.taofeek.cita.main.SectionsPagerAdapter;
 import com.taofeek.cita.organization.FacilityHomeActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

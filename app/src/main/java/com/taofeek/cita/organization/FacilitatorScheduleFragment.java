@@ -3,7 +3,6 @@ package com.taofeek.cita.organization;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,15 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.firestore.Query;
 
-import com.taofeek.cita.FacilityDataModel;
-import com.taofeek.cita.HomeActivity;
 import com.taofeek.cita.R;
 
 

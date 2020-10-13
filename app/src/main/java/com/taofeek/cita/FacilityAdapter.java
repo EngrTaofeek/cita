@@ -21,7 +21,7 @@ import com.taofeek.cita.customer.BookingActivity;
 
 import static java.security.AccessController.getContext;
 
-class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, FacilityAdapter.FacilityHolder> {
+public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, FacilityAdapter.FacilityHolder> {
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -58,7 +58,7 @@ class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel, Facili
         return new FacilityHolder(v);
     }
 
-    class FacilityHolder extends RecyclerView.ViewHolder{
+    public class FacilityHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView email;
         TextView address;

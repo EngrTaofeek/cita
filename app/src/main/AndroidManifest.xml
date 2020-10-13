@@ -26,7 +26,7 @@
             android:label="@string/title_activity_facility_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".customer.HomeActivity"
             android:label="@string/title_activity_user_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".organization.FacilityEditActivity" />

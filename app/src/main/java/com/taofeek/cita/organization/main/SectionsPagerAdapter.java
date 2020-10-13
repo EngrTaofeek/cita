@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.taofeek.cita.ForYouFragment;
 import com.taofeek.cita.R;
-import com.taofeek.cita.UserActivityFragment;
-import com.taofeek.cita.UserGuidelineFragment;
 import com.taofeek.cita.organization.ActivityFragment;
 import com.taofeek.cita.organization.FacilitatorScheduleFragment;
 
