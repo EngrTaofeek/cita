@@ -13,10 +13,13 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,7 +39,7 @@ import com.taofeek.cita.customer.UserEditActivity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FacilityEditActivity extends AppCompatActivity {
+public class FacilityEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String TAG = "testing";
     public ImageView mProfileImage;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -46,6 +49,8 @@ public class FacilityEditActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private FirebaseFirestore mDb;
     private String mEmail;
+    private Spinner mSpinner;
+    private String mLabel;
 
 
     @Override
@@ -53,6 +58,9 @@ public class FacilityEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility_edit);
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        populateSpinner();
+        mSpinner.setOnItemSelectedListener(this);
+        
 
         mProfileImage = findViewById(R.id.facility_profile_image);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -162,6 +170,7 @@ public class FacilityEditActivity extends AppCompatActivity {
         }
     }
 
+
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
@@ -237,5 +246,33 @@ public class FacilityEditActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
+    }
+    private void populateSpinner() {
+        mSpinner = (Spinner) findViewById(R.id.spinner_category);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        mSpinner.setAdapter(adapter);
+    }
+
+
+    public String getSpinnerItem(String text){
+        String spinnerText = text;
+        return text;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mLabel = parent.getItemAtPosition(position).toString();
+        getSpinnerItem(mLabel);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
