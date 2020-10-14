@@ -22,9 +22,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -51,6 +54,13 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     private String mEmail;
     private Spinner mSpinner;
     private String mLabel;
+    private TextInputLayout mInputName;
+    private TextInputLayout mInputEmail;
+    private TextInputLayout mInputAddress;
+    private TextInputLayout mInputPhone;
+    private TextInputLayout mInputOverview;
+    private TextInputLayout mInputCapacity;
+    private TextInputLayout mInputOthers;
 
 
     @Override
@@ -60,7 +70,14 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         populateSpinner();
         mSpinner.setOnItemSelectedListener(this);
-        
+
+        mInputName = findViewById(R.id.text_input_facility_name);
+        mInputEmail = findViewById(R.id.text_input_email_address);
+        mInputAddress = findViewById(R.id.text_input_address);
+        mInputPhone = findViewById(R.id.text_input_phone);
+        mInputOverview = findViewById(R.id.text_input_overview);
+        mInputCapacity = findViewById(R.id.text_input_capacity);
+        mInputOthers = findViewById(R.id.text_input_others);
 
         mProfileImage = findViewById(R.id.facility_profile_image);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -79,8 +96,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
-        TextInputLayout inputEmail = findViewById(R.id.text_input_email_address);
-        mEmail = getEditText(inputEmail);
+        mEmail = getEditText(mInputEmail);
         mDb = FirebaseFirestore.getInstance();
 
     }
@@ -99,25 +115,25 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     @Override
     protected void onStart() {
         super.onStart();
-        TextInputLayout inputEmail = findViewById(R.id.text_input_email_address);
-        mEmail = getEditText(inputEmail);
+        retrieveProfilePhoto();
+        retrieveEditText("name", mInputName);
+        retrieveEditText("email",mInputEmail);
+        retrieveEditText("address" , mInputAddress);
+        retrieveEditText("capacity", mInputCapacity);
+        retrieveEditText("phone", mInputPhone);
+        retrieveEditText("others", mInputOthers);
+        retrieveEditText("overview", mInputOverview);
     }
 
     public void addTextDocuments() {
-        TextInputLayout inputName = findViewById(R.id.text_input_facility_name);
-        TextInputLayout inputEmail = findViewById(R.id.text_input_email_address);
-        TextInputLayout inputAddress = findViewById(R.id.text_input_address);
-        TextInputLayout inputPhone = findViewById(R.id.text_input_phone);
-        TextInputLayout inputOverview = findViewById(R.id.text_input_overview);
-        TextInputLayout inputCapacity = findViewById(R.id.text_input_capacity);
-        TextInputLayout inputOthers = findViewById(R.id.text_input_others);
-        String name = getEditText(inputName);
-        mEmail = getEditText(inputEmail);
-        String address = getEditText(inputAddress);
-        String phone = getEditText(inputPhone);
-        String overview = getEditText(inputOverview);
-        String capacity = getEditText(inputCapacity);
-        String others = getEditText(inputOthers);
+
+        String name = getEditText(mInputName);
+        mEmail = getEditText(mInputEmail);
+        String address = getEditText(mInputAddress);
+        String phone = getEditText(mInputPhone);
+        String overview = getEditText(mInputOverview);
+        String capacity = getEditText(mInputCapacity);
+        String others = getEditText(mInputOthers);
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
         Log.d(TAG, "edit test " + permissible_capacity_int);
@@ -247,6 +263,57 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
+    private void retrieveEditText(final String key, final TextInputLayout textInputLayout) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
+        final String data = prefs.getString("email_id", "default_email");
+        EditText editText = textInputLayout.getEditText();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("facility_details").document("details").collection("profile").document(mEmail)
+
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if ( document.exists()) {
+                        String field = document.getString(key);
+                        editText.setText(field);
+
+                    }
+                }
+            }
+        });
+
+
+
+    }
+
+    private void retrieveProfilePhoto() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
+        final String data = prefs.getString("email_id", "default_email");
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("facility_details").document("details").collection("profile").document(mEmail)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if ( document.exists()) {
+                        String field = document.getString("image_url");
+                        Picasso.get().load(field).into(mProfileImage);
+                    }
+                }
+            }
+        });
+
+
+
+        // Picasso.get().load(mImageUri).into(mImageView);
+
+    }
+
     private void populateSpinner() {
         mSpinner = (Spinner) findViewById(R.id.spinner_category);
 // Create an ArrayAdapter using the string array and a default spinner layout
