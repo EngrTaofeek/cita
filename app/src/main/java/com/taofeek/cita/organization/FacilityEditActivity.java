@@ -95,9 +95,14 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                 uploadFile();
             }
         });
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
+        final String data = prefs.getString("email_id", "default_email");
 
-        mEmail = getEditText(mInputEmail);
+
+        mEmail = data;
         mDb = FirebaseFirestore.getInstance();
+
+        retrieveProfilePhoto();
 
     }
 
@@ -115,7 +120,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     @Override
     protected void onStart() {
         super.onStart();
-        retrieveProfilePhoto();
         retrieveEditText("name", mInputName);
         retrieveEditText("email",mInputEmail);
         retrieveEditText("address" , mInputAddress);
@@ -123,6 +127,30 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         retrieveEditText("phone", mInputPhone);
         retrieveEditText("others", mInputOthers);
         retrieveEditText("overview", mInputOverview);
+        retrieveSpinner();
+    }
+
+    private void retrieveSpinner() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("facility_details").document("details").collection("profile").document(mEmail)
+
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if ( document.exists()) {
+                        String field = document.getString("spinner_position");
+                        if ((field != null) && !(field.isEmpty()) ) {
+                            int position = Integer.parseInt(field);
+                            mSpinner.setSelection(position);
+                        }
+
+
+                    }
+                }
+            }
+        });
     }
 
     public void addTextDocuments() {
@@ -270,13 +298,20 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("facility_details").document("details").collection("profile").document(mEmail)
-
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
+                        if (key == "capacity"){
+                            Double field = document.getDouble(key);
+                            //int fieldInt = field.intValue();
+                            String text = String.valueOf(field);
+                            editText.setText(text);
+                            return;
+
+                        }
                         String field = document.getString(key);
                         editText.setText(field);
 
@@ -335,6 +370,13 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mLabel = parent.getItemAtPosition(position).toString();
         getSpinnerItem(mLabel);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // Create a new user with a first and last name
+        String positionString = String.valueOf(position);
+        Map<String, Object> user = new HashMap<>();
+        user.put("spinner_position", positionString);
+        db.collection("facility_details").document("details").collection("profile").document(mEmail)
+                .set(user);
 
     }
 
