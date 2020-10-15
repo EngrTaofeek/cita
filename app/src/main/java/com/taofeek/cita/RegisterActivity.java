@@ -8,12 +8,15 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -239,10 +242,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
 
-
-
-
-
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -276,6 +275,38 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    // Hide and show Password
+
+    public void showHiddenPassword(View view){
+        if (view.getId()==R.id.password_icon){
+
+            if (mPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // show Password
+                mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }else {
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // Hide Password
+                mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        }
+    }
+
+    public void showPassword(View view){
+        if (view.getId()==R.id.password_icon){
+
+            if (mConfirmPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // show Password
+                mConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }else {
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // Hide Password
+                mConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        }
     }
 
 }
