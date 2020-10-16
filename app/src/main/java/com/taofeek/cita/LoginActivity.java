@@ -8,12 +8,15 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -305,5 +308,22 @@ public class LoginActivity extends AppCompatActivity {
 
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    // Show and Hide Password
+    public void displayPassword(View view){
+        if (view.getId()==R.id.password_icon){
+
+            if (mPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // Show Password
+                mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }else {
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // Hide Password
+                mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        }
+
     }
 }

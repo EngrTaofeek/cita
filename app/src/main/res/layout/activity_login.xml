@@ -79,19 +79,40 @@
         android:textColor="@color/button_color"
         android:text="@string/password"/>
 
-    <EditText
-        android:id="@+id/password_input"
+    <RelativeLayout
+        android:id="@+id/password_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/input_background"
-        android:inputType="textPassword"
-        android:padding="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="horizontal"
+        android:background="@drawable/input_background"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="textPassword"
+            android:padding="4dp">
+
+        </EditText>
+
+        <ImageView
+            android:id="@+id/password_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="displayPassword"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_show_password"
+            android:layout_centerInParent="true"
+            android:paddingRight="8dp"/>
+
+    </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -157,7 +178,7 @@
         android:textColor="@color/button_color"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_input"
+        app:layout_constraintTop_toBottomOf="@id/password_layout"
         android:layout_marginTop="10dp"/>
 
     <com.google.android.gms.common.SignInButton
