@@ -81,6 +81,12 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
 
         mProfileImage = findViewById(R.id.facility_profile_image);
         mProgressBar = findViewById(R.id.progress_bar);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
+        final String data = prefs.getString("email_id", "default_email");
+
+
+        mEmail = data;
+        mDb = FirebaseFirestore.getInstance();
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,14 +101,10 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                 uploadFile();
             }
         });
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
-        final String data = prefs.getString("email_id", "default_email");
-
-
-        mEmail = data;
-        mDb = FirebaseFirestore.getInstance();
-
         retrieveProfilePhoto();
+
+
+
 
     }
 
@@ -154,7 +156,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     }
 
     public void addTextDocuments() {
-
         String name = getEditText(mInputName);
         mEmail = getEditText(mInputEmail);
         String address = getEditText(mInputAddress);
@@ -165,7 +166,8 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
         Log.d(TAG, "edit test " + permissible_capacity_int);
-        String permissible_capacity = String.valueOf(permissible_capacity_int);
+        int spinnerPosition = mSpinner.getSelectedItemPosition();
+        String spinner_position = String.valueOf(spinnerPosition);
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // Create a new user with a first and last name
@@ -176,30 +178,35 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         user.put("phone", phone);
         user.put("others", others);
         user.put("overview", overview);
-        Map<String, Object> user_int = new HashMap<>();
-        user_int.put("capacity", capacity);
-        user_int.put("permissible_capacity", permissible_capacity_int);
+//        Map<String, Object> user_int = new HashMap<>();
+//        user_int.put("capacity", capacity);
+//        user_int.put("permissible_capacity", permissible_capacity_int);
+        user.put("capacity", capacity_int);
+        user.put("permissible_capacity", permissible_capacity_int);
+        user.put("spinner_position",spinner_position);
+
+
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
         final String data = prefs.getString("email_id", "default_email");*/
 
 
 // Add a new document with a generated ID
         db.collection("facility_details").document("details").collection("profile").document(mEmail)
-                .set(user)
+                .set(user,SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 
                     }
                 });
-        db.collection("facility_details").document("details").collection("profile").document(mEmail)
+      /* db.collection("facility_details").document("details").collection("profile").document(mEmail)
                 .set(user_int)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 
                     }
-                });
+                });*/
 
 
     }
@@ -222,7 +229,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     }
 
     private void uploadFile() {
-        if (mProfileImage != null) {
+        if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
             mUploadTask = fileReference.putFile(mImageUri)
@@ -288,7 +295,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                         }
                     });
         } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            return;
         }
     }
     private void retrieveEditText(final String key, final TextInputLayout textInputLayout) {
@@ -306,11 +313,10 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                     if ( document.exists()) {
                         if (key == "capacity"){
                             Double field = document.getDouble(key);
-                            //int fieldInt = field.intValue();
-                            String text = String.valueOf(field);
+                            int capacity = field.intValue();
+                            String text = String.valueOf(capacity);
                             editText.setText(text);
                             return;
-
                         }
                         String field = document.getString(key);
                         editText.setText(field);
@@ -370,13 +376,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mLabel = parent.getItemAtPosition(position).toString();
         getSpinnerItem(mLabel);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // Create a new user with a first and last name
-        String positionString = String.valueOf(position);
-        Map<String, Object> user = new HashMap<>();
-        user.put("spinner_position", positionString);
-        db.collection("facility_details").document("details").collection("profile").document(mEmail)
-                .set(user);
 
     }
 

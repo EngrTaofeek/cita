@@ -182,7 +182,7 @@ public class UserEditActivity extends AppCompatActivity  {
 
 // Add a new document with a generated ID
         db.collection("users").document("details").collection("profile").document(data)
-                .set(user)
+                .set(user, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -283,7 +283,7 @@ public class UserEditActivity extends AppCompatActivity  {
                         }
                     });
         } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            return;
         }
     }
     private void checkAuthenticationState(){
