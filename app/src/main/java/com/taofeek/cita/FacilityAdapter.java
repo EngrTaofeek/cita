@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.customer.BookingActivity;
 
@@ -42,7 +43,10 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
         holder.email_text = model.getEmail();
         holder.facility_name = model.getName();
         if(model.getImage_url() !=null){
-            Picasso.get().load(model.getImage_url()).into(holder.profile);
+            Picasso.get().load(model.getImage_url()).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                    .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
+                    .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                    .centerCrop().into(holder.profile);
         }
 
 

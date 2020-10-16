@@ -41,8 +41,8 @@
                 android:id="@+id/book_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/easy_booking" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_baseline_supervisor_account_24" />
 
         </androidx.cardview.widget.CardView>
 

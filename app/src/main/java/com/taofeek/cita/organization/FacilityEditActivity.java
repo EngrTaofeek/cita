@@ -35,6 +35,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.R;
 import com.taofeek.cita.customer.UserEditActivity;
@@ -217,7 +218,10 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
-            Picasso.get().load(mImageUri).into(mProfileImage);
+            Picasso.get().load(mImageUri).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                    .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
+                    .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                    .centerCrop().into(mProfileImage);
         }
     }
 
@@ -343,7 +347,11 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).into(mProfileImage);
+                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                                .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
+                                .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                                .centerCrop()   // apply scaling OR
+                                .into(mProfileImage);
                     }
                 }
             }

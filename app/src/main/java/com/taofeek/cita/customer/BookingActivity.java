@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.R;
 
@@ -178,7 +179,11 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).into(profile);
+                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                                .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
+                                .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                                .centerCrop()   // apply scaling OR
+                                .into(profile);
                     }
                 }
             }
