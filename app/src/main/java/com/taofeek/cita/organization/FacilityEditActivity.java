@@ -219,9 +219,8 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
             Picasso.get().load(mImageUri).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                    .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
                     .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
-                    .centerCrop().into(mProfileImage);
+                    .fit().centerCrop().into(mProfileImage);
         }
     }
 
@@ -348,9 +347,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                     if ( document.exists()) {
                         String field = document.getString("image_url");
                         Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                                .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
-                                .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
-                                .centerCrop()   // apply scaling OR
+                               .fit().centerCrop()   // apply scaling OR
                                 .into(mProfileImage);
                     }
                 }

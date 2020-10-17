@@ -44,9 +44,9 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
         holder.facility_name = model.getName();
         if(model.getImage_url() !=null){
             Picasso.get().load(model.getImage_url()).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                    .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
+                     //if image is failed to load - this image is set to imageview
                     .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
-                    .centerCrop().into(holder.profile);
+                    .fit().centerCrop().into(holder.profile);
         }
 
 

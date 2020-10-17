@@ -68,7 +68,6 @@ public class UserEditActivity extends AppCompatActivity  {
         mName = findViewById(R.id.user_edit_name);
         mProgressBar = findViewById(R.id.progress_bar);
         Button saveButton = findViewById(R.id.user_save_button);
-        checkAuthenticationState();
         mImageView = findViewById(R.id.user_profile_pic);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,8 +125,7 @@ public class UserEditActivity extends AppCompatActivity  {
                     if ( document.exists()) {
                         String field = document.getString("image_url");
                         Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                                .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
-                                .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                                 .fit()//stores images for offline view
                                 .centerCrop().into(mImageView);
                     }
                 }
@@ -214,9 +212,8 @@ public class UserEditActivity extends AppCompatActivity  {
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
             Picasso.get().load(mImageUri).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                    .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
                     .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
-                    .centerCrop().into(mImageView);
+                    .fit().centerCrop().into(mImageView);
         }
     }
     private String getFileExtension(Uri uri) {
