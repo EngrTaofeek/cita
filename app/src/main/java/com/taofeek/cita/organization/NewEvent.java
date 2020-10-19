@@ -129,7 +129,8 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
 
 // Add a new document with a generated ID
         db.collection("facility_details").document("details").collection("profile")
-                .document("event").collection(mEmail).document(mCurrentDateString)
+                .document("event").collection(mEmail).document(mCurrentDateString).collection("time")
+                .document(mTime)
                 .set(user,SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
