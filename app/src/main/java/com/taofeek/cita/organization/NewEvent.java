@@ -123,15 +123,14 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
 
 
 
-        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
-        final String data = prefs.getString("email_id", "default_email");*/
-
-
-// Add a new document with a generated ID
-        db.collection("facility_details").document("details").collection("profile")
+     /* remember to add another db for date and time
+     db.collection("facility_details").document("details").collection("profile")
                 .document("event").collection(mEmail).document(mCurrentDateString).collection("time")
-                .document(mTime)
-                .set(user,SetOptions.merge())
+                .document(mTime)*/
+
+
+        db.collection("facility_details").document("details").collection("event")
+                .document(mEmail).set(user,SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -197,9 +196,8 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                                     Map<String, Object> user = new HashMap<>();
                                     String image_url = image_uri.toString();
                                     user.put("image_url", image_url);
-                                    mDb.collection("facility_details").document("details").collection("profile")
-                                            .document("event").collection(mEmail).document(mCurrentDateString).collection("time")
-                                            .document(mTime).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    mDb.collection("facility_details").document("details").collection("event")
+                                            .document(mEmail).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Log.d(TAG, "DocumentSnapshot added with ID: " + mEmail);

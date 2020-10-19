@@ -19,6 +19,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.customer.BookingActivity;
+import com.taofeek.cita.customer.EventBooking;
 
 import static java.security.AccessController.getContext;
 
@@ -81,7 +82,7 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
                 @Override
                 public void onClick(View view) {
                     mContext = view.getContext();
-                    Intent intent = new Intent(mContext, BookingActivity.class);
+                    Intent intent = new Intent(mContext, EventBooking.class);
                     //intent.putExtra(BookingActivity.emailItem, email_text);
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
                     SharedPreferences.Editor editor = prefs.edit();
