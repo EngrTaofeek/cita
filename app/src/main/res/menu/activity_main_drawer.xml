@@ -6,6 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_edit_profile"
+            android:iconTint="@color/light_blue"
             android:icon="@drawable/ic_baseline_edit_24"
             android:title="@string/nav_edit_profile" />
         <item

@@ -13,9 +13,13 @@
     <string name="create_account"> Create an account </string>
     <string name="welcome"> Welcome </string>
     <string name="menu_gallery">Gallery</string>
+    <string name="signUp_with"> Or sign up with </string>
     <string name="sign_up"> Sign Up </string>
+    <string name="cont"> Continue </string>
+    <string name="forgot_password"> Forgot Password? </string>
     <string name="log_header"> Log In</string>
     <string name="userName"> Username</string>
+    <string name="new_to_cita"> New to cita? </string>
     <string name="address">Address</string>
     <string name="address_column">Address:</string>
     <string name="phone"> Phone No</string>
@@ -25,7 +29,7 @@
     <string name="createNewAccount"> Create new account? </string>
     <string name="forgotPassword"> Forgot Password? </string>
     <string name="password"> Password </string>
-    <string name="facilitate"> I want to facilitate </string>
+    <string name="facilitate"> Sign Up also as Facilitator  </string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_facility_home">FacilityHomeActivity</string>
     <string name="title_activity_facility">FacilityActivity</string>
@@ -34,8 +38,11 @@
     <string name="nav_schedule">See schedule</string>
     <string name="nav_gym">Available sport facilities</string>
     <string name="nav_facility">Sign in as facilitator</string>
+    <string name="by_registering"> By registering, I accept</string>
+    <string name="terms_and_conditions"> the terms of use and policies </string>
     <string name="nav_user_activity">Activity and History</string>
     <string name="settings">Settings</string>
+    <string name="already_have_an_account"> Already have an account? </string>
     <string name="log_out">Sign out</string>
     <string name="nav_switch_to_user">Sign in as a user</string>
     <string name="appointment"><![CDATA[Appointment & Schedules]]></string>
@@ -56,8 +63,17 @@
     <string name="expectation_question">What to expect from us?</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="email_column">email:</string>
+    <string name="google"> Google </string>
+    <string name="create_an_acount">
+        <br> Create \n </br>
+        <br>an Account </br>
+    </string>
+    <string name="full_name"> Full Name </string>
     <string name="phone_colon">Phone:</string>
     <string name="overview_colon">Overview:</string>
+    <string name="skip"> Skip </string>
+    <string name="sign_in"> Sign In</string>
+    <string name="get_started"> Get Started </string>
     <string name="capacity_colon">Capacity:</string>
     <string name="others_colon">Others:</string>
     <string name="booking_time_hint">Choose time for booking.</string>

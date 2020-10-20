@@ -7,4 +7,6 @@
     <color name="color_gold">#DAA520</color>
     <color name="darkblack">#000000</color>
     <color name="white">#ffffff</color>
+    <string name="black"> #000000 </string>
+    <color name="light_blue">#003F6B</color>
 </resources>
