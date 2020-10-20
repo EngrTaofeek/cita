@@ -55,12 +55,14 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
     private String TAG = "testing";
     private String mCurrentDateString;
     private String mTime;
-    private TextView mTextViewDate;
+    private TextView mTextViewDate,mTextViewTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+        mTextViewTime = findViewById(R.id.textView7);
+
         mTitle = findViewById(R.id.editTextTitle);
         mAddress = findViewById(R.id.editTextAddress);
         mCapacity = findViewById(R.id.editTextCapacity);
@@ -123,10 +125,10 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
 
 
 
-     /* remember to add another db for date and time
+     //remember to add another db for date and time
      db.collection("facility_details").document("details").collection("profile")
                 .document("event").collection(mEmail).document(mCurrentDateString).collection("time")
-                .document(mTime)*/
+                .document(mTime).set(user,SetOptions.merge());
 
 
         db.collection("facility_details").document("details").collection("event")
@@ -251,27 +253,35 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         switch (item.getItemId()) {
             case R.id.item_8am:
                 mTime = "8AM";
+                mTextViewTime.setText("8AM - 10AM");
                 return true;
             case R.id.item_10am:
                 mTime = "10AM";
+                mTextViewTime.setText("10AM - 12PM");
                 return true;
             case R.id.item_12pm:
                 mTime = "12PM";
+                mTextViewTime.setText("12PM - 2PM");
                 return true;
             case R.id.item_2pm:
                 mTime = "2PM";
+                mTextViewTime.setText("2PM - 4PM");
                 return true;
             case R.id.item_4pm:
                 mTime = "4PM";
+                mTextViewTime.setText("4PM - 6PM");
                 return true;
             case R.id.item_6pm:
                 mTime = "6PM";
+                mTextViewTime.setText("6PM - 8PM");
                 return true;
             case R.id.item_8pm:
                 mTime = "8PM";
+                mTextViewTime.setText("8PM - 10PM");
                 return true;
             case R.id.item_10pm:
                 mTime = "10PM";
+                mTextViewTime.setText("10PM - 12AM");
                 return true;
             default:
                 return false;
