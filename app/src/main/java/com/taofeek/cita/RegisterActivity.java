@@ -311,7 +311,23 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    public void showPassword(View view){
+        if (view.getId()==R.id.password_image){
 
+            if (mPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.hide_password);
+                // show Password
+                mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }else {
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                // Hide Password
+                mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        }
     }
+
+
+
+}
 
 

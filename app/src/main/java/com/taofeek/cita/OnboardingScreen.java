@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.List;
 public class OnboardingScreen extends AppCompatActivity {
     private OnboardingAdapter onboardingAdapter;
     private Button button;
+    private ImageView imageView;
+    private TextView textView;
+    private ViewPager2 viewPager2;
     private LinearLayout layoutOnboardingIndicators;
     private LinearLayout skipLayout;
 
@@ -27,9 +31,10 @@ public class OnboardingScreen extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding_screen);
         button = findViewById(R.id.next_button);
         layoutOnboardingIndicators = findViewById(R.id.layoutOnboardingIndicators);
-        skipLayout = findViewById(R.id.skip_layout);
+        textView = findViewById(R.id.skip);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        // Skip text to open another activity when clicked
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OnboardingScreen.this, MainActivity.class);
@@ -40,7 +45,7 @@ public class OnboardingScreen extends AppCompatActivity {
         setUpOnboardingIndicators();
         setCurrentOnboardingIndicators(0);
 
-        ViewPager2 onboardingViewPager = findViewById(R.id.onboardingViewPager);
+         final ViewPager2 onboardingViewPager = findViewById(R.id.onboardingViewPager);
         onboardingViewPager.setAdapter(onboardingAdapter);
 
         onboardingViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -48,6 +53,18 @@ public class OnboardingScreen extends AppCompatActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 setCurrentOnboardingIndicators(position);
+            }
+        });
+        // button to move the slides
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onboardingViewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()){
+                    onboardingViewPager.setCurrentItem(onboardingViewPager.getCurrentItem() + 1);
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
             }
         });
     }

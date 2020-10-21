@@ -109,12 +109,28 @@
 
     </RelativeLayout>
 
+    <CheckBox
+        android:id="@+id/login_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_layout"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:buttonTint="@color/light_blue"
+        android:layout_marginLeft="25dp"
+        android:text="@string/facilitate"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/light_blue"
+        android:textSize="15sp" />
+
+
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_layout"
+        app:layout_constraintTop_toBottomOf="@id/login_check_box"
         android:layout_marginRight="20dp"
         android:fontFamily="@font/nunito"
         android:layout_marginTop="10dp"

@@ -80,6 +80,9 @@
         <br>an Account </br>
     </string>
     <string name="full_name"> Full Name </string>
+    <string name="recover"> Recover </string>
+    <string name="notifications"> Notifications </string>
+    <string name="help"> Help &amp; Feedback </string>
     <string name="phone_colon">Phone:</string>
     <string name="overview_colon">Overview:</string>
     <string name="skip"> Skip </string>

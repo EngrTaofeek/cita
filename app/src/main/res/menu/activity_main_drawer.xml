@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_edit_profile"
             android:iconTint="@color/light_blue"
-            android:icon="@drawable/ic_baseline_edit_24"
+            android:icon="@drawable/ic_baseline_person_24"
             android:title="@string/nav_edit_profile" />
         <item
             android:id="@+id/nav_schedule"
@@ -15,8 +15,8 @@
             android:title="@string/nav_schedule" />
         <item
             android:id="@+id/nav_gym"
-            android:icon="@drawable/ic_baseline_fitness_center_24"
-            android:title="@string/nav_gym" />
+            android:icon="@drawable/ic_baseline_notifications_active_24"
+            android:title="@string/notifications" />
         <item
             android:id="@+id/nav_switch_to_facility"
             android:icon="@drawable/ic_baseline_supervisor_account_24"
@@ -31,7 +31,7 @@
             android:title="@string/settings" />
         <item
             android:id="@+id/nav_log_out"
-            android:icon="@drawable/ic_baseline_arrow_back_24"
-            android:title="@string/log_out" />
+            android:icon="@drawable/ic_baseline_help_outline_24"
+            android:title="@string/help" />
     </group>
 </menu>

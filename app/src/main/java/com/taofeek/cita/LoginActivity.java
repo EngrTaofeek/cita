@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmail, mPassword;
     private ProgressBar mProgressBar;
     private GoogleSignInClient mGoogleSignInClient;
+    private TextView textView;
     private static final int RC_SIGN_IN = 9001;
     private CheckBox mCheckBox;
 
@@ -62,11 +63,21 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mEmail = (EditText) findViewById(R.id.email_input);
         mPassword = (EditText) findViewById(R.id.password_input);
+        textView = findViewById(R.id.forgotPassword);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
         mCheckBox = findViewById(R.id.login_check_box);
 
         Button signIn = (Button) findViewById(R.id.button);
+
+        // forgot password text to open another activity
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RecoverPassword.class);
+                startActivity(intent);
+            }
+        });
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
