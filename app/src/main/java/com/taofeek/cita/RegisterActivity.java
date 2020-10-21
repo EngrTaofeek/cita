@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -39,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
 
     //widgets
-    private EditText mEmail, mPassword, mConfirmPassword;
+    private EditText mEmail, mPassword, mConfirmPassword, validateEmail;
     private Button mRegister;
     private ProgressBar mProgressBar;
     private GoogleSignInClient mGoogleSignInClient;
@@ -52,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -68,7 +72,19 @@ public class RegisterActivity extends AppCompatActivity {
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String Password = mPassword.getText().toString().trim();
                 Log.d(TAG, "onClick: attempting to register.");
+
+                // Password Authentication
+                if (TextUtils.isEmpty(Password)){
+                    mPassword.setError("Password is required!");
+                    return;
+                }
+                if (Password.length() <6){
+                    mPassword.setError("Passwords must be greater than 6 characters!");
+                    return;
+                }
+
 
                 //check for null valued EditText fields
                 if(!isEmpty(mEmail.getText().toString())
@@ -104,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
         preGoogleSignInSetUp();
 
     }
+
     public void registerNewEmail(final String email, String password){
 
         showDialog();
@@ -283,7 +300,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (view.getId()==R.id.password_icon){
 
             if (mPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
-                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+                ((ImageView)(view)).setImageResource(R.drawable.hide_password);
                 // show Password
                 mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             }else {
@@ -294,19 +311,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void showPassword(View view){
-        if (view.getId()==R.id.password_icon){
 
-            if (mConfirmPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
-                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
-                // show Password
-                mConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            }else {
-                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
-                // Hide Password
-                mConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-            }
-        }
     }
 
-}
+

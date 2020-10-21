@@ -315,8 +315,8 @@ public class LoginActivity extends AppCompatActivity {
         if (view.getId()==R.id.password_icon){
 
             if (mPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
-                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
-                // Show Password
+                ((ImageView)(view)).setImageResource(R.drawable.hide_password);
+                        // Show Password
                 mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             }else {
                 ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);

@@ -12,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".OnboardingScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+
         <activity android:name=".EventList"></activity>
         <activity android:name=".customer.EventBooking" />
         <activity android:name=".organization.NewEvent" />
