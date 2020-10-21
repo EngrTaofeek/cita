@@ -2,20 +2,20 @@ package com.taofeek.cita.customer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -25,13 +25,11 @@ import android.widget.TimePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-import com.taofeek.cita.HomeActivity;
 import com.taofeek.cita.R;
 
 import com.taofeek.cita.time.DatePickerFragment;
@@ -39,13 +37,13 @@ import com.taofeek.cita.time.TimePickerFragment;
 
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BookingActivity extends AppCompatActivity implements  TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class BookingActivity extends AppCompatActivity implements   DatePickerDialog.OnDateSetListener, PopupMenu.OnMenuItemClickListener {
     public static final String emailItem = "facility_email";
+    private String mTime;
     public String mEmail, mFacilityTitle ,mStrHrsToShow,mCurrentDateString, mUserMail,mConsumerName;
     public ImageView profile ;
     public TextView title, address, email, phone, overview, capacity, others, mTextViewTime, mTextViewDate;
@@ -53,7 +51,7 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
     final Calendar calendar=Calendar.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private LinearLayout mBook_layout;
-    private String mCompleteTime;
+
 
 
     @Override
@@ -143,13 +141,13 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
 
     private void sendAppointmentToFacilitator() {
         Map<String, Object> user = new HashMap<>();
-        user.put("time", mCompleteTime );
+        user.put("time", mTime );
         user.put("email", mUserMail);
         user.put("name", mConsumerName);
         user.put("date", mCurrentDateString);
         user.put("status", "Pending");
         db.collection("facility_details").document("details").collection("appointment").
-                document("facilitator").collection("schedule").document(mEmail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                document("facilitator").collection("schedule").document(mUserMail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
@@ -162,7 +160,7 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
     }
     private void saveUserSchedule(){
         Map<String, Object> user = new HashMap<>();
-        user.put("time", mCompleteTime );
+        user.put("time", mTime );
         user.put("email", mUserMail);
         user.put("name", mFacilityTitle);
         user.put("date", mCurrentDateString);
@@ -184,7 +182,11 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).into(profile);
+                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                                .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
+                                .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                                .fit().centerCrop()   // apply scaling OR
+                                .into(profile);
                     }
                 }
             }
@@ -232,23 +234,57 @@ public class BookingActivity extends AppCompatActivity implements  TimePickerDia
 
 
 
+
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.time_menu);
+        popup.show();
+    }
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        mTextViewTime = (TextView) findViewById(R.id.time_text);
-        String am_pm = "";
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_8am:
+                mTime = "8AM";
+                mTextViewTime.setText("8AM - 10AM");
+                return true;
+            case R.id.item_10am:
+                mTime = "10AM";
+                mTextViewTime.setText("10AM - 12PM");
+                return true;
+            case R.id.item_12pm:
+                mTime = "12PM";
+                mTextViewTime.setText("12PM - 2PM");
 
-        Calendar datetime = Calendar.getInstance();
-        datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        datetime.set(Calendar.MINUTE, minute);
-
-        if (datetime.get(Calendar.AM_PM) == Calendar.AM)
-            am_pm = "AM";
-        else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
-            am_pm = "PM";
-
-        mStrHrsToShow = (datetime.get(Calendar.HOUR) == 0) ?"12":datetime.get(Calendar.HOUR)+"";
-        mCompleteTime = mStrHrsToShow +":"+datetime.get(Calendar.MINUTE)+" "+am_pm;
-        mTextViewTime.setText(mCompleteTime);
+                return true;
+            case R.id.item_2pm:
+                mTime = "2PM";
+                mTextViewTime.setText("2PM - 4PM");
+                return true;
+            case R.id.item_4pm:
+                mTime = "4PM";
+                mTextViewTime.setText("4PM - 6PM");
+                return true;
+            case R.id.item_6pm:
+                mTime = "6PM";
+                mTextViewTime.setText("6PM - 8PM");
+                return true;
+            case R.id.item_8pm:
+                mTime = "8PM";
+                mTextViewTime.setText("8PM - 10PM");
+                return true;
+            case R.id.item_10pm:
+                mTime = "10PM";
+                mTextViewTime.setText("10PM - 12AM");
+                return true;
+            default:
+                return false;
+        }
+    }
+    public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.trim().isEmpty())
+            return false;
+        return true;
     }
 
     @Override

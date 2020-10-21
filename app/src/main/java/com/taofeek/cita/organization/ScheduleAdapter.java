@@ -95,20 +95,22 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
                     popup.inflate(R.menu.facilitator_schedule_menu);
                     //adding click listener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
+                            email_text = email.getText().toString().trim();
                             switch (item.getItemId()) {
                                 case R.id.item_menu_appoint:
                                     status.setText("APPOINTED");
-                                    updateStatus("APPOINTED");
+                                    updateStatus("APPROVED", email_text);
                                     return true;
                                 case R.id.item_menu_decline:
                                     status.setText("DECLINED");
-                                    updateStatus("DECLINED");
+                                    updateStatus("DECLINED", email_text);
                                     return true;
                                 case R.id.item_menu_pending:
                                     status.setText("PENDING");
-                                    updateStatus("PENDING");
+                                    updateStatus("PENDING", email_text);
                                     return true;
                                 default:
                                     return false;
@@ -122,7 +124,7 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
             });
 
         }
-        public void updateStatus(String status){
+        public void updateStatus(String status, String userEmail){
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(name.getContext());
             final String data = prefs.getString("email_id", "oduola.taofeekkola@gmail.com");
@@ -130,7 +132,7 @@ class ScheduleAdapter extends FirestoreRecyclerAdapter<ScheduleDataModel, com.ta
             Map<String, Object> user = new HashMap<>();
             user.put("status", status );
             db.collection("facility_details").document("details").collection("appointment").
-                    document("facilitator").collection("schedule").document(mEmail).update(user);
+                    document("facilitator").collection("schedule").document(userEmail).update(user);
             db.collection("users").document("details").collection("appointment").
                     document(mEmail).update(user);
         }

@@ -1,7 +1,9 @@
 package com.taofeek.cita.organization;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -61,6 +63,15 @@ public class ActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_activity, container, false);
+        View v = inflater.inflate(R.layout.fragment_activity, container, false);
+        CardView newEvent = v.findViewById(R.id.card_create_event);
+        newEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewEvent.class);
+                startActivity(intent);
+            }
+        });
+        return v;
     }
 }

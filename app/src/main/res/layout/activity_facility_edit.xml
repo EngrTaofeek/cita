@@ -16,7 +16,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="32dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -147,12 +147,12 @@
             android:id="@+id/facility_submit_button"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="UPLOAD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_overview" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
         <ProgressBar
             android:id="@+id/progress_bar"
             style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
@@ -166,6 +166,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/facility_submit_button" />
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/text_input_overview"
+            app:layout_constraintStart_toStartOf="@+id/text_input_overview"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_overview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

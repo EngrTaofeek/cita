@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.UserActivityFragment">
+    tools:context=".customer.EventBooking">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_activity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/user_schedule_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

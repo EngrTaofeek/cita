@@ -95,11 +95,12 @@
 
                 <TextView
                     android:id="@+id/user_schedule_status"
-                    android:layout_width="59dp"
+                    android:layout_width="0dp"
                     android:layout_height="19dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:text="Pending"
+                    app:layout_constraintEnd_toStartOf="@+id/schedule_picture_facility"
                     app:layout_constraintStart_toEndOf="@+id/schedule_email_facility"
                     app:layout_constraintTop_toTopOf="@+id/schedule_email_facility" />
 

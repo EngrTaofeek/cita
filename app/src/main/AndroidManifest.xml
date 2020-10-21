@@ -12,10 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".OnboardingScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
+
+        <activity android:name=".EventList"></activity>
+        <activity android:name=".customer.EventBooking" />
+        <activity android:name=".organization.NewEvent" />
         <activity android:name=".customer.BookingActivity" />
         <activity android:name=".FacilityListDisplay" />
         <activity android:name=".SplashScreen">
@@ -30,7 +35,7 @@
             android:label="@string/title_activity_facility_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".customer.HomeActivity"
             android:label="@string/title_activity_user_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".organization.FacilityEditActivity" />

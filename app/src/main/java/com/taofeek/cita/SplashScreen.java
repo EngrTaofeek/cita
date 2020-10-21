@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.taofeek.cita.customer.HomeActivity;
 import com.taofeek.cita.organization.FacilityHomeActivity;
 /*
     xmlns:app="http://schemas.android.com/apk/res-auto"

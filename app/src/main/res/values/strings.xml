@@ -8,6 +8,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="category_array">
+        <item>Cinema</item>
+        <item>Events</item>
+        <item>Offices</item>
+        <item>Recreational facility</item>
+        <item>Restaurants</item>
+        <item>School</item>
+        <item>Sport facility and gyms</item>
+        <item>Others</item>
+    </string-array>
+
 
     <string name="menu_home">Home</string>
     <string name="create_account"> Create an account </string>

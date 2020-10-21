@@ -36,6 +36,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.cita.LoginActivity;
 import com.taofeek.cita.R;
@@ -67,7 +68,6 @@ public class UserEditActivity extends AppCompatActivity  {
         mName = findViewById(R.id.user_edit_name);
         mProgressBar = findViewById(R.id.progress_bar);
         Button saveButton = findViewById(R.id.user_save_button);
-        checkAuthenticationState();
         mImageView = findViewById(R.id.user_profile_pic);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +124,9 @@ public class UserEditActivity extends AppCompatActivity  {
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).into(mImageView);
+                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                                 .fit()//stores images for offline view
+                                .centerCrop().into(mImageView);
                     }
                 }
             }
@@ -182,7 +184,7 @@ public class UserEditActivity extends AppCompatActivity  {
 
 // Add a new document with a generated ID
         db.collection("users").document("details").collection("profile").document(data)
-                .set(user)
+                .set(user, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -209,7 +211,9 @@ public class UserEditActivity extends AppCompatActivity  {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
-            Picasso.get().load(mImageUri).into(mImageView);
+            Picasso.get().load(mImageUri).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                    .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                    .fit().centerCrop().into(mImageView);
         }
     }
     private String getFileExtension(Uri uri) {
@@ -283,7 +287,7 @@ public class UserEditActivity extends AppCompatActivity  {
                         }
                     });
         } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            return;
         }
     }
     private void checkAuthenticationState(){
