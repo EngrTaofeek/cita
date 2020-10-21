@@ -130,7 +130,7 @@
             android:id="@+id/confirm_password_input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/password"
+            android:hint="@string/confirm_password"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
