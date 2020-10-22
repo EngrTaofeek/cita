@@ -39,7 +39,6 @@ import com.taofeek.cita.organization.FacilityHomeActivity;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final String TAG = "RegisterActivity";
 
     //widgets
     private EditText mEmail, mPassword, mConfirmPassword, validateEmail;
@@ -73,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String Password = mPassword.getText().toString().trim();
-                Log.d(TAG, "onClick: attempting to register.");
 
                 // Password Authentication
                 if (TextUtils.isEmpty(Password)){
@@ -129,10 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         if (task.isSuccessful()){
-                            Log.d(TAG, "onComplete: AuthState: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                             //send email verificaiton
                             sendVerificationEmail();
@@ -181,8 +177,6 @@ public class RegisterActivity extends AppCompatActivity {
      * Redirects the user to the login screen
      */
     private void redirectLoginScreen(){
-        Log.d(TAG, "redirectLoginScreen: redirecting to login screen.");
-
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
@@ -262,7 +256,6 @@ public class RegisterActivity extends AppCompatActivity {
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
 
         }
     }

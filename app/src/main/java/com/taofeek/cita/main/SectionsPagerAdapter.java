@@ -21,7 +21,7 @@ import com.taofeek.cita.customer.UserGuidelineFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.guideline, R.string.for_you, R.string.activity};
+    private static final int[] TAB_TITLES = new int[]{R.string.category, R.string.for_you, R.string.activity};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {

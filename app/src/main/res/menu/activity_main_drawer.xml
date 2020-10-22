@@ -13,25 +13,17 @@
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_baseline_schedule_24"
             android:title="@string/nav_schedule" />
-        <item
-            android:id="@+id/nav_gym"
-            android:icon="@drawable/ic_baseline_notifications_active_24"
-            android:title="@string/notifications" />
+
         <item
             android:id="@+id/nav_switch_to_facility"
             android:icon="@drawable/ic_baseline_supervisor_account_24"
             android:title="@string/nav_facility" />
-        <item
-            android:id="@+id/nav_facility_activity"
-            android:icon="@drawable/ic_baseline_schedule_24"
-            android:title="@string/nav_user_activity" />
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/settings" />
+
+
         <item
             android:id="@+id/nav_log_out"
-            android:icon="@drawable/ic_baseline_help_outline_24"
-            android:title="@string/help" />
+            android:icon="@drawable/ic_baseline_arrow_back_24"
+            android:title="Sign Out" />
     </group>
 </menu>
+

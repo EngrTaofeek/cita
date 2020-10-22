@@ -52,7 +52,6 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
     private StorageReference mStorageRef;
     private FirebaseFirestore mDb;
     private String mEmail;
-    private String TAG = "testing";
     private String mCurrentDateString;
     private String mTime;
     private TextView mTextViewDate,mTextViewTime;
@@ -110,7 +109,6 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         String capacity = getEditText(mCapacity);
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
-        Log.d(TAG, "edit test " + permissible_capacity_int);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> user = new HashMap<>();
         user.put("title", title);
@@ -125,9 +123,9 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
 
 
 
-     //remember to add another db for date and time
-     db.collection("facility_details").document("details").collection("profile")
-                .document("event").collection(mEmail).document(mCurrentDateString).collection("time")
+
+        db.collection("facility_details").document("details").collection("event")
+                .document(mEmail).collection("date").document(mCurrentDateString).collection("time")
                 .document(mTime).set(user,SetOptions.merge());
 
 
@@ -202,8 +200,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                                             .document(mEmail).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot added with ID: " + mEmail);
-                                        }
+                                           }
                                     }).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -212,8 +209,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error adding document", e);
-                                        }
+                                           }
                                     });
 
                                 }

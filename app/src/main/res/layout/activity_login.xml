@@ -113,16 +113,16 @@
         android:id="@+id/login_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_layout"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
-        android:buttonTint="@color/light_blue"
         android:layout_marginLeft="25dp"
-        android:text="@string/facilitate"
+        android:layout_marginTop="10dp"
+        android:buttonTint="@color/light_blue"
         android:fontFamily="@font/nunito"
+        android:text="@string/facilitate"
         android:textColor="@color/light_blue"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
 
     <TextView
@@ -232,21 +232,27 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"/>
 
-    <Button
-        android:id="@+id/google_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:drawableStart="@drawable/google_icon"
-        android:textColor="@color/darkblack"
-        android:background="@drawable/edit_background"
-        android:paddingStart="12dp"
-        android:text="@string/google"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Sign_up_with"
-        android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/google_icon"
-        android:paddingLeft="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Sign_up_with" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 

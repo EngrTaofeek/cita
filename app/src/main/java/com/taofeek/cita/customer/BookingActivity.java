@@ -79,7 +79,7 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
         populateTextView("email",email);
         populateTextView("phone",phone);
         populateTextView("overview",overview);
-        populateTextView("capacity",capacity);
+        populateTextView("permissible_capacity",capacity);
         populateTextView("others",others);
         mBook_layout = findViewById(R.id.booking_layout);
         mBook_layout.setVisibility(View.GONE);
@@ -208,11 +208,11 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
                 if (task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
-                        if ( key == "capacity"){
+                        if ( key == "permissible_capacity"){
                             Long capacity = document.getLong(key);
-                            String book_capaccity = capacity.toString().trim();
+                            String book_capacity = capacity.toString().trim();
 
-                            textView.setText(book_capaccity);
+                            textView.setText(book_capacity);
 
                         }else {
                             String field = document.getString(key);

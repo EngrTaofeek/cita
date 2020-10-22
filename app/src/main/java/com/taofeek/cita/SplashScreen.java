@@ -47,9 +47,8 @@ public class SplashScreen extends AppCompatActivity {
         animBlink = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.blink);
         TextView splash_title = findViewById(R.id.splash_cita);
-        TextView splash_motto = findViewById(R.id.splash_motto);
         splash_title.startAnimation(animBlink);
-        splash_motto.startAnimation(animBlink);
+
 
         // imageView = findViewById(R.id.splash_image);
         // splash screen to open the Main Activity

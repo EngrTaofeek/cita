@@ -31,7 +31,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_event_24"/>
+                android:tint="@color/button_color"
+                app:srcCompat="@drawable/ic_baseline_event_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,7 +74,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_event_24"/>
+                android:tint="@color/button_color"
+                app:srcCompat="@drawable/ic_baseline_fitness_center_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,7 +110,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_event_24"/>
+                android:tint="@color/button_color"
+                app:srcCompat="@drawable/ic_baseline_business_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -144,7 +147,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_event_24"/>
+                android:tint="@color/button_color"
+                app:srcCompat="@drawable/ic_baseline_school_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,7 +182,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_sports_soccer_24"/>
+                android:tint="@color/button_color"
+                app:srcCompat="@drawable/ic_baseline_sports_soccer_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -213,7 +218,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_event_24"/>
+                app:srcCompat="@drawable/ic_baseline_local_hospital_24" />
 
             <TextView
                 android:layout_width="wrap_content"

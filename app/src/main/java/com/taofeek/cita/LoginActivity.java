@@ -36,7 +36,6 @@ import com.taofeek.cita.customer.HomeActivity;
 import com.taofeek.cita.organization.FacilityHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginActivity";
 
     //Firebase
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -87,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                 //check if the fields are filled out
                 if (!isEmpty(mEmail.getText().toString())
                         && !isEmpty(mPassword.getText().toString())) {
-                    Log.d(TAG, "onClick: attempting to authenticate.");
                     hideSoftKeyboard();
 
                     showDialog();
@@ -202,7 +200,6 @@ public class LoginActivity extends AppCompatActivity {
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
 
         }
     }
@@ -234,7 +231,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
@@ -262,7 +258,6 @@ public class LoginActivity extends AppCompatActivity {
                                  }
                         else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
@@ -305,7 +300,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "Email sent.");
+
                         }
                     }
                 });

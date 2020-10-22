@@ -44,9 +44,7 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
         holder.email_text = model.getEmail();
         holder.facility_name = model.getName();
         if(model.getImage_url() !=null){
-            Picasso.get().load(model.getImage_url()).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                     //if image is failed to load - this image is set to imageview
-                    .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+            Picasso.get().load(model.getImage_url())
                     .fit().centerCrop().into(holder.profile);
         }
 
@@ -82,7 +80,7 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
                 @Override
                 public void onClick(View view) {
                     mContext = view.getContext();
-                    Intent intent = new Intent(mContext, EventBooking.class);
+                    Intent intent = new Intent(mContext, BookingActivity.class);
                     //intent.putExtra(BookingActivity.emailItem, email_text);
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
                     SharedPreferences.Editor editor = prefs.edit();

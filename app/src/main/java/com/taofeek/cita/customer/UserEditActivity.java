@@ -47,7 +47,6 @@ import java.util.Map;
 
 public class UserEditActivity extends AppCompatActivity  {
 
-    private String TAG = "testing";
     EditText mName,mEmail,mAddress,mPhone;
     Spinner mFacilitySpinner;
     private ImageView mImageView;
@@ -253,7 +252,6 @@ public class UserEditActivity extends AppCompatActivity  {
                                              .document(data).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                          @Override
                                          public void onSuccess(Void aVoid) {
-                                             Log.d(TAG, "DocumentSnapshot added with ID: " + data);
                                          }
                                      }).addOnSuccessListener(new OnSuccessListener<Void>() {
                                          @Override
@@ -263,7 +261,6 @@ public class UserEditActivity extends AppCompatActivity  {
                                      }).addOnFailureListener(new OnFailureListener() {
                                          @Override
                                          public void onFailure(@NonNull Exception e) {
-                                             Log.w(TAG, "Error adding document", e);
                                          }
                                      });
 
@@ -288,22 +285,6 @@ public class UserEditActivity extends AppCompatActivity  {
                     });
         } else {
             return;
-        }
-    }
-    private void checkAuthenticationState(){
-        Log.d(TAG, "checkAuthenticationState: checking authentication state.");
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(user == null){
-            Log.d(TAG, "checkAuthenticationState: user is null, navigating back to login screen.");
-
-            Intent intent = new Intent(UserEditActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        }else{
-            Log.d(TAG, "checkAuthenticationState: user is authenticated.");
         }
     }
 

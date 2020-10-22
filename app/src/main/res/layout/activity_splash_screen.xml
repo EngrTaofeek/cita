@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/button_color"
-    tools:context=".SplashScreen" >
+    android:background="@drawable/background"
+
+    tools:context=".SplashScreen">
 
     <TextView
         android:id="@+id/splash_cita"
@@ -15,22 +16,11 @@
         android:fontFamily="@font/playfair_display"
         android:text="cita"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-        android:textColor="@color/white"
+        android:textColor="@color/button_color"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/splash_motto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/stay_fit"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/splash_cita"
-        app:layout_constraintStart_toStartOf="@+id/splash_cita"
-        app:layout_constraintTop_toBottomOf="@+id/splash_cita" />
 </androidx.constraintlayout.widget.ConstraintLayout>

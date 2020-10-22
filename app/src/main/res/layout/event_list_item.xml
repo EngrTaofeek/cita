@@ -36,7 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+                app:srcCompat="@drawable/image_loading" />
 
             <TextView
                 android:id="@+id/event_title"

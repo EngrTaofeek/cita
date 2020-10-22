@@ -44,7 +44,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FacilityEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private String TAG = "testing";
     public ImageView mProfileImage;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri mImageUri;
@@ -166,7 +165,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         String others = getEditText(mInputOthers);
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
-        Log.d(TAG, "edit test " + permissible_capacity_int);
         int spinnerPosition = mSpinner.getSelectedItemPosition();
         String spinner_position = String.valueOf(spinnerPosition);
         // Access a Cloud Firestore instance from your Activity
@@ -264,8 +262,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                                             .document(mEmail).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot added with ID: " + mEmail);
-                                        }
+                                            }
                                     }).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -274,8 +271,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error adding document", e);
-                                        }
+                                            }
                                     });
 
                                 }

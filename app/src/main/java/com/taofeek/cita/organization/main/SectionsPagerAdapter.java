@@ -20,7 +20,7 @@ import com.taofeek.cita.organization.FacilitatorScheduleFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.activity, R.string.nav_schedule};
+    private static final int[] TAB_TITLES = new int[]{R.string.activity, R.string.event};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {

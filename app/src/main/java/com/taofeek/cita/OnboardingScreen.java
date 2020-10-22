@@ -31,16 +31,10 @@ public class OnboardingScreen extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding_screen);
         button = findViewById(R.id.next_button);
         layoutOnboardingIndicators = findViewById(R.id.layoutOnboardingIndicators);
-        textView = findViewById(R.id.skip);
+
 
         // Skip text to open another activity when clicked
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OnboardingScreen.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
         setUpOnboardingItem();
         setUpOnboardingIndicators();
         setCurrentOnboardingIndicators(0);
@@ -133,4 +127,6 @@ public class OnboardingScreen extends AppCompatActivity {
 
 
     }
+
+
 }
