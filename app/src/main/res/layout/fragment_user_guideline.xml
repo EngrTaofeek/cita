@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nestedScrollView"
@@ -8,14 +9,226 @@
     tools:context=".customer.UserGuidelineFragment">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/image_loading"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/events_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_event_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkblack"
+                android:text="Events"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/gyms_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginLeft="5dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_event_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkblack"
+                android:text="Gyms"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/business_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/events_card"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_event_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkblack"
+                android:text="Offices Business"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/schools_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/gyms_card"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginLeft="5dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_event_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkblack"
+                android:text="Schools"
+                android:textSize="15sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sports_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/business_card"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_sports_soccer_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkblack"
+                android:text="Sport Facilites"
+                android:textSize="15sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/health_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/schools_card"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginLeft="5dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_event_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkblack"
+                android:text="Health and Beauty"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

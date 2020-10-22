@@ -11,104 +11,136 @@
         android:id="@+id/user_profile_pic"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_person_24" />
+        app:srcCompat="@drawable/ic_baseline_person_24"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userNameWrapper"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/fullName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_profile_pic"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp">
-        <EditText
-            android:id="@+id/user_edit_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/userName"
-            android:textColorHint="@color/button_color"
-            android:padding="10dp"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:textSize="15sp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/light_blue"
+        android:fontFamily="@font/nunito"
+        android:layout_marginTop="10dp"
+        android:text="@string/full_name"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailWrapper"
+    <EditText
+        android:id="@+id/user_edit_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userNameWrapper"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp">
-        <EditText
-            android:id="@+id/user_edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:textColorHint="@color/button_color"
-            android:padding="10dp"
-            android:inputType="textEmailAddress"
-            android:textColor="#000000"
-            android:textSize="15sp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Samuel Ajanlekoko"
+        android:textColorHint="@color/light_blue"
+        android:textColor="@color/darkblack"
+        android:paddingStart="12dp"
+        android:background="@drawable/edit_background"
+        app:layout_constraintTop_toBottomOf="@id/fullName"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="12dp"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userAddress"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailWrapper"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp">
-        <EditText
-            android:id="@+id/user_edit_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/address"
-            android:textColorHint="@color/button_color"
-            android:padding="10dp"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:textSize="15sp"/>
+        app:layout_constraintTop_toBottomOf="@id/user_edit_name"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/light_blue"
+        android:fontFamily="@font/nunito"
+        android:layout_marginTop="10dp"
+        android:text="@string/email"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userPhoneNo"
+    <EditText
+        android:id="@+id/user_edit_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userAddress"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp">
-        <EditText
-            android:id="@+id/user_edit_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone"
-            android:textColorHint="@color/button_color"
-            android:padding="10dp"
-            android:inputType="phone"
-            android:textColor="#000000"
-            android:textSize="15sp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Samuelajanlekoko@gmail.com"
+        android:textColorHint="@color/light_blue"
+        android:textColor="@color/darkblack"
+        android:paddingStart="12dp"
+        android:background="@drawable/edit_background"
+        app:layout_constraintTop_toBottomOf="@id/email"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="12dp"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_edit_email"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/light_blue"
+        android:fontFamily="@font/nunito"
+        android:layout_marginTop="10dp"
+        android:text="@string/address"/>
+
+    <EditText
+        android:id="@+id/user_edit_address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Olusare Olugbagi street"
+        android:textColorHint="@color/light_blue"
+        android:textColor="@color/darkblack"
+        android:paddingStart="12dp"
+        android:background="@drawable/edit_background"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="12dp"/>
+
+    <TextView
+        android:id="@+id/phoneNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_edit_address"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/light_blue"
+        android:fontFamily="@font/nunito"
+        android:layout_marginTop="10dp"
+        android:text="@string/phone"/>
+
+    <EditText
+        android:id="@+id/user_edit_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="07065334512"
+        android:textColorHint="@color/light_blue"
+        android:textColor="@color/darkblack"
+        android:paddingStart="12dp"
+        android:background="@drawable/edit_background"
+        app:layout_constraintTop_toBottomOf="@id/phoneNo"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="12dp"/>
 
     <Button
         android:id="@+id/user_save_button"
@@ -116,8 +148,8 @@
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userPhoneNo"
-        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/user_edit_phone"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:textColor="#FFFFFF"
@@ -125,19 +157,12 @@
         android:text="@string/save"
         android:background="@drawable/button_background"/>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_save_button" />
+
+
+
+
+
+
 
 
 
