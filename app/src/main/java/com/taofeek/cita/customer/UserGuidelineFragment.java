@@ -1,13 +1,16 @@
 package com.taofeek.cita.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taofeek.cita.EventList;
 import com.taofeek.cita.R;
 
 /**
@@ -61,6 +64,15 @@ public class UserGuidelineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_guideline, container, false);
+        View v = inflater.inflate(R.layout.fragment_user_guideline, container, false);
+        CardView events = v.findViewById(R.id.events_card);
+        events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EventList.class);
+                startActivity(intent);
+            }
+        });
+        return v;
     }
 }

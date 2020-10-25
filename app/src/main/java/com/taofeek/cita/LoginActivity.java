@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -46,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmail, mPassword;
     private ProgressBar mProgressBar;
     private GoogleSignInClient mGoogleSignInClient;
-    private TextView textView;
+    private TextView forgotPasswordText;
     private static final int RC_SIGN_IN = 9001;
     private CheckBox mCheckBox;
 
@@ -62,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mEmail = (EditText) findViewById(R.id.email_input);
         mPassword = (EditText) findViewById(R.id.password_input);
-        textView = findViewById(R.id.forgotPassword);
+        forgotPasswordText = findViewById(R.id.forgotPassword);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
         mCheckBox = findViewById(R.id.login_check_box);
@@ -70,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         Button signIn = (Button) findViewById(R.id.button);
 
         // forgot password text to open another activity
-        textView.setOnClickListener(new View.OnClickListener() {
+        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RecoverPassword.class);
@@ -109,13 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        TextView forgotPassword = findViewById(R.id.forgotPassword);
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                forgotPassword();
-            }
-        });
+
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -291,20 +284,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    private void forgotPassword(){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String emailAddress = mEmail.getText().toString().trim();
 
-        auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-
-                        }
-                    }
-                });
-    }
 
     private void hideDialog(){
         if(mProgressBar.getVisibility() == View.VISIBLE){
