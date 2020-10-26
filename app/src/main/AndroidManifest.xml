@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.taofeek.cita">
+    package="com.taofeek.citaa">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,16 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecoverPassword"></activity>
+        <activity android:name="com.taofeek.citaa.RecoverPassword"></activity>
         <activity
-            android:name=".OnboardingScreen"
+            android:name="com.taofeek.citaa.OnboardingScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".EventList" />
-        <activity android:name=".customer.EventBooking" />
-        <activity android:name=".organization.NewEvent" />
-        <activity android:name=".customer.BookingActivity" />
-        <activity android:name=".FacilityListDisplay" />
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.taofeek.citaa.EventList" />
+        <activity android:name="com.taofeek.citaa.customer.EventBooking" />
+        <activity android:name="com.taofeek.citaa.organization.NewEvent" />
+        <activity android:name="com.taofeek.citaa.customer.BookingActivity" />
+        <activity android:name="com.taofeek.citaa.FacilityListDisplay" />
+        <activity android:name="com.taofeek.citaa.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,18 +29,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".organization.FacilityHomeActivity"
+            android:name="com.taofeek.citaa.organization.FacilityHomeActivity"
             android:label="@string/title_activity_facility_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".customer.HomeActivity"
+            android:name="com.taofeek.citaa.customer.HomeActivity"
             android:label="@string/title_activity_user_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".organization.FacilityEditActivity" />
-        <activity android:name=".customer.UserEditActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.taofeek.citaa.organization.FacilityEditActivity" />
+        <activity android:name="com.taofeek.citaa.customer.UserEditActivity" />
+        <activity android:name="com.taofeek.citaa.RegisterActivity" />
+        <activity android:name="com.taofeek.citaa.LoginActivity" />
+        <activity android:name="com.taofeek.citaa.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

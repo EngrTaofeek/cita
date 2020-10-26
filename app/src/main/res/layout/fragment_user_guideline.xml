@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/darkblack"
-                android:text="Offices Business"
+                android:text="Offices &amp; Business"
                 android:textSize="15sp"/>
 
         </LinearLayout>
