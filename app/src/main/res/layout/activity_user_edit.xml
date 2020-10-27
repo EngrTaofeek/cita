@@ -106,10 +106,11 @@
         android:textColorHint="@color/light_blue"
         android:textColor="@color/darkblack"
         android:paddingStart="12dp"
+        android:paddingLeft="12dp"
         android:background="@drawable/edit_background"
         app:layout_constraintTop_toBottomOf="@id/address"
         android:layout_marginTop="5dp"
-        android:paddingLeft="12dp"/>
+        />
 
     <TextView
         android:id="@+id/phoneNo"

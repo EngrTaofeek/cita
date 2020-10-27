@@ -38,6 +38,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.citaa.R;
+import com.taofeek.citaa.customer.UserEditActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,10 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility_edit);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("profile_state", "old");
+        editor.apply();
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         populateSpinner();
         mSpinner.setOnItemSelectedListener(this);
@@ -82,7 +87,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
 
         mProfileImage = findViewById(R.id.facility_profile_image);
         mProgressBar = findViewById(R.id.progress_bar);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
         final String data = prefs.getString("email_id", "default_email");
 
 
@@ -100,6 +104,8 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
             public void onClick(View v) {
                 addTextDocuments();
                 uploadFile();
+                startActivity(new Intent(FacilityEditActivity.this,FacilityHomeActivity.class));
+                finish();
             }
         });
         retrieveProfilePhoto();
