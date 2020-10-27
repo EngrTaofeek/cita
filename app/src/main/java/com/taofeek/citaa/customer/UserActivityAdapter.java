@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.taofeek.citaa.R;
 
 public class UserActivityAdapter extends FirestoreRecyclerAdapter<ActivityDataModel, UserActivityAdapter.UserActivityHolder> {
@@ -33,6 +34,7 @@ public class UserActivityAdapter extends FirestoreRecyclerAdapter<ActivityDataMo
         holder.time.setText(model.getTime());
         holder.date.setText(model.getDate());
         holder.status.setText(model.getStatus());
+
     }
 
     @NonNull

@@ -1,11 +1,13 @@
 package com.taofeek.citaa.customer;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ public class UserActivityFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public String mUserMail;
 
     public UserActivityFragment() {
         // Required empty public constructor
@@ -70,8 +73,10 @@ public class UserActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        CollectionReference detailsRef =  db.collection("users")
-                .document("details").collection("appointment");
+        SharedPreferences prefs_user = PreferenceManager.getDefaultSharedPreferences(getContext());
+        mUserMail = prefs_user.getString("email_id", "default_email");
+        CollectionReference detailsRef = db.collection("users").document("details").collection("appointment").
+                document(mUserMail).collection("facility");
         View v = inflater.inflate(R.layout.fragment_user_activity, container, false);
         Query query = detailsRef.orderBy("email", Query.Direction.ASCENDING);
 
@@ -87,12 +92,8 @@ public class UserActivityFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(adapter);
-        /*if (adapter.getItemCount() >= 1){
-            ConstraintLayout empty = v.findViewById(R.id.empty_schedule);
-            empty.setVisibility(View.GONE);
 
 
-        }*/
 
         return v;
 

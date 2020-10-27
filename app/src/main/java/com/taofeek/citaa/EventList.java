@@ -24,14 +24,14 @@ public class EventList extends AppCompatActivity {
         setUpRecyclerView();
     }
     private void setUpRecyclerView() {
-        Query query = detailsRef.orderBy("name", Query.Direction.ASCENDING);
+        Query query = detailsRef.orderBy("title", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<EventDataModel> options = new FirestoreRecyclerOptions.Builder<EventDataModel>()
                 .setQuery(query, EventDataModel.class)
                 .build();
 
         adapter = new EventAdapter(options);
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.event_list_recyclerview);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

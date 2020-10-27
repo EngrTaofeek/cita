@@ -1,15 +1,23 @@
 package com.taofeek.citaa.organization;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.taofeek.citaa.R;
 
 /**
@@ -27,6 +35,9 @@ public class ActivityFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private EventHistoryAdapter adapter;
 
     public ActivityFragment() {
         // Required empty public constructor
@@ -72,6 +83,41 @@ public class ActivityFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final String data = prefs.getString("email_id", "default_email");
+        String mEmail = data;
+
+
+        CollectionReference detailsRef =  db.collection("facility_details").document("details").collection("event")
+                .document("facilitator").collection(mEmail);
+
+
+        Query query = detailsRef.orderBy("email", Query.Direction.ASCENDING);
+
+
+        FirestoreRecyclerOptions<EventHistoryDataModel> options = new FirestoreRecyclerOptions.Builder<EventHistoryDataModel>()
+                .setQuery(query, EventHistoryDataModel.class)
+                .build();
+
+        adapter = new EventHistoryAdapter(options);
+        RecyclerView recyclerView = v.findViewById(R.id.facility_event_recycler);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setAdapter(adapter);
         return v;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+
     }
 }

@@ -62,6 +62,7 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
         mFacilityTitle = prefs_user.getString("facility_item_name", "Facility");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(BookingActivity.this);
         final String data = prefs.getString("facility_item_id", "teslim@yahoo.com");
+        mTextViewTime = findViewById(R.id.time_text);
         mEmail = data;
         profile= findViewById(R.id.book_image);
         title = findViewById(R.id.book_title);
@@ -111,14 +112,6 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
             }
         });
         CardView time_item = findViewById(R.id.card_view_time_picker);
-        time_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
-        });
         Button buttonConfirmation = findViewById(R.id.button_book_confirmation);
         buttonConfirmation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +138,7 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
         user.put("date", mCurrentDateString);
         user.put("status", "Pending");
         db.collection("facility_details").document("details").collection("appointment").
-                document("facilitator").collection("schedule").document(mUserMail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                document("facilitator").collection(mEmail).document(mUserMail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Snackbar.make(mBook_layout,"You have successfully booked an appointment.", Snackbar.LENGTH_LONG).show();
@@ -164,7 +157,7 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
         user.put("date", mCurrentDateString);
         user.put("status", "Pending");
         db.collection("users").document("details").collection("appointment").
-                document(mEmail).set(user);
+                document(mUserMail).collection("facility").document(mEmail).set(user);
 
     }
 

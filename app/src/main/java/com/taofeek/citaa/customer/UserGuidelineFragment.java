@@ -64,11 +64,46 @@ public class UserGuidelineFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        /*item>Gyms</item>
+        <item>Offices</item>
+        <item>Health</item>
+        <item>School</item>
+        <item>Sport facility and gyms</item>*/
         mGyms = v.findViewById(R.id.gyms_card);
         mSport = v.findViewById(R.id.sports_card);
         mHealth = v.findViewById(R.id.health_card);
         mOffice = v.findViewById(R.id.business_card);
         mSchools = v.findViewById(R.id.schools_card);
+        mGyms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCategory("Gyms");
+            }
+        });
+        mOffice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCategory("Offices");
+            }
+        });
+        mHealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCategory("Health");
+            }
+        });
+        mSchools.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCategory("School");
+            }
+        });
+        mSport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCategory("Sport facility and gyms");
+            }
+        });
         return v;
     }
 

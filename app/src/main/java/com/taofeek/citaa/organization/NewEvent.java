@@ -9,9 +9,11 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -27,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -58,6 +61,13 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
         mTextViewTime = findViewById(R.id.textView7);
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        mDb = FirebaseFirestore.getInstance();
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(NewEvent.this);
+        final String data = prefs.getString("email_id", "default_email");
+        mEmail = data;
 
         mTitle = findViewById(R.id.editTextTitle);
         mAddress = findViewById(R.id.editTextAddress);
@@ -86,9 +96,11 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
             @Override
             public void onClick(View v) {
                 // Check if date and time was set
-                if ((isNullOrEmpty(mTime)) && (isNullOrEmpty(mCurrentDateString))){
+                if (!(isNullOrEmpty(mTime)) && !(isNullOrEmpty(mCurrentDateString))){
                     addTextDocuments();
                     uploadFile();
+                    Snackbar.make(findViewById(R.id.new_event_layout)," Successfully created a new event",
+                            Snackbar.LENGTH_LONG).show();
                 }
                 else {
                     Snackbar.make(findViewById(R.id.new_event_layout)," Kindly fill all the fields and select date and time",
@@ -122,8 +134,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
 
 
         db.collection("facility_details").document("details").collection("event")
-                .document(mEmail).collection("date").document(mCurrentDateString).collection("time")
-                .document(mTime).set(user,SetOptions.merge());
+                .document("facilitator").collection(mEmail).document(mEmail).set(user,SetOptions.merge());
 
 
         db.collection("facility_details").document("details").collection("event")

@@ -14,9 +14,10 @@
         android:layout_marginRight="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/facility_event_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/activity_event_list" />
+            tools:listitem="@layout/event_history_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView

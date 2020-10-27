@@ -12,14 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.taofeek.citaa.RecoverPassword"></activity>
+        <activity android:name="com.taofeek.citaa.RecoverPassword">
+
+        </activity>
         <activity
             android:name="com.taofeek.citaa.OnboardingScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
         <activity android:name="com.taofeek.citaa.EventList" />
-        <activity android:name="com.taofeek.citaa.customer.EventBooking" />
+        <activity android:name="com.taofeek.citaa.customer.EventBooking"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name="com.taofeek.citaa.organization.NewEvent" />
-        <activity android:name="com.taofeek.citaa.customer.BookingActivity" />
+        <activity android:name="com.taofeek.citaa.customer.BookingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name="com.taofeek.citaa.FacilityListDisplay" />
         <activity android:name="com.taofeek.citaa.SplashScreen">
             <intent-filter>

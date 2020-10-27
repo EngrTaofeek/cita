@@ -149,9 +149,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:textColor="@color/white"
-            android:text="UPLOAD"
             android:background="@drawable/button_background"
+            android:text="UPLOAD"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
@@ -177,6 +177,8 @@
             app:layout_constraintEnd_toEndOf="@+id/text_input_overview"
             app:layout_constraintStart_toStartOf="@+id/text_input_overview"
             app:layout_constraintTop_toBottomOf="@+id/text_input_overview" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

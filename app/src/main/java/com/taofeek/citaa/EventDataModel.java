@@ -1,13 +1,14 @@
 package com.taofeek.citaa;
 
 public class EventDataModel {
-    public String email,title,address,description,category,time,date,capacity;
+    public String email,title,address,description,category,time,date;
+    public int capacity;
     public String image_url;
 
     public EventDataModel(){}
 
     public EventDataModel(String email, String title, String address, String description,
-                          String category, String time, String date, String capacity, String image_url) {
+                          String category, String time, String date, int capacity, String image_url) {
         this.email = email;
         this.title = title;
         this.address = address;
@@ -53,7 +54,7 @@ public class EventDataModel {
         return date;
     }
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 }

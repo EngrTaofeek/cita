@@ -37,6 +37,7 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
         holder.name.setText(model.getName());
         holder.email.setText(model.getEmail());
         holder.address.setText(model.getAddress());
+        holder.phone.setText(model.getPhone());
         holder.email_text = model.getEmail();
         holder.facility_name = model.getName();
         if(model.getImage_url() !=null){
@@ -58,7 +59,7 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
     }
 
     public class FacilityHolder extends RecyclerView.ViewHolder{
-        TextView name;
+        TextView name,phone;
         TextView email;
         TextView address;
         ImageView profile;
@@ -71,6 +72,7 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
             address = itemView.findViewById(R.id.list_address);
             profile = itemView.findViewById(R.id.list_picture);
             book_button = itemView.findViewById(R.id.list_button_book_now);
+            phone = itemView.findViewById(R.id.list_phone);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

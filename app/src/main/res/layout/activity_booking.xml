@@ -11,17 +11,51 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardTitle"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/book_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/book_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:drawableTint="@color/button_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
@@ -35,7 +69,7 @@
             app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/book_title">
+            app:layout_constraintTop_toBottomOf="@+id/cardTitle">
 
             <ImageView
                 android:id="@+id/book_image"
@@ -53,6 +87,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="42dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:text="@string/address_column"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +102,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/colorPrimary"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +117,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:text="@string/email_column"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +128,8 @@
             android:id="@+id/email_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
@@ -107,6 +148,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:text="@string/phone_colon"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +163,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/colorPrimary"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,6 +178,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:text="@string/overview_colon"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +193,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/colorPrimary"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,6 +208,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:text="@string/capacity_colon"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
@@ -174,6 +223,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/colorPrimary"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -188,6 +238,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:text="@string/others_colon"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
@@ -201,6 +253,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/colorPrimary"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -217,33 +270,14 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/button_background"
             android:text="BOOK NOW"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/dark_bottom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_direction" />
-
-        <Button
-            android:id="@+id/button_direction"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/input_background"
-            android:text="GET DIRECTION"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/button_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/others_value" />
+
 
         <View
             android:id="@+id/empty_view"
@@ -260,7 +294,7 @@
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/button_book"
-            app:layout_constraintTop_toBottomOf="@+id/button_direction"
+            app:layout_constraintTop_toBottomOf="@+id/empty_view"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.cardview.widget.CardView
@@ -367,7 +401,7 @@
         <LinearLayout
             android:id="@+id/dark_bottom"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="5dp"
             android:background="@color/darkblack"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"

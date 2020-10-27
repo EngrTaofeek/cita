@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,6 +60,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     private TextInputLayout mInputOverview;
     private TextInputLayout mInputCapacity;
     private TextInputLayout mInputOthers;
+    private String mCategoryText;
 
 
     @Override
@@ -76,6 +78,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         mInputOverview = findViewById(R.id.text_input_overview);
         mInputCapacity = findViewById(R.id.text_input_capacity);
         mInputOthers = findViewById(R.id.text_input_others);
+
 
         mProfileImage = findViewById(R.id.facility_profile_image);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -181,6 +184,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         user.put("capacity", capacity_int);
         user.put("permissible_capacity", permissible_capacity_int);
         user.put("spinner_position",spinner_position);
+        user.put("category",mCategoryText);
 
 
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
@@ -374,6 +378,9 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mLabel = parent.getItemAtPosition(position).toString();
+        mCategoryText = parent.getSelectedItem().toString();
+
+
         getSpinnerItem(mLabel);
 
     }

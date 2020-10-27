@@ -19,6 +19,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.citaa.customer.BookingActivity;
+import com.taofeek.citaa.customer.EventBooking;
 
 public class EventAdapter extends FirestoreRecyclerAdapter<EventDataModel, EventAdapter.EventHolder> {
     /**
@@ -33,15 +34,14 @@ public class EventAdapter extends FirestoreRecyclerAdapter<EventDataModel, Event
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull EventAdapter.EventHolder holder, int position, @NonNull EventDataModel model) {
+    protected void onBindViewHolder(@NonNull EventHolder holder, int position, @NonNull EventDataModel model) {
         holder.title.setText(model.getTitle());
         holder.email.setText(model.getEmail());
         holder.address.setText(model.getAddress());
         holder.email_text = model.getEmail();
-        holder.facility_name = model.getTitle();
+        holder.event_name = model.getTitle();
         if(model.getImage_url() !=null){
-            Picasso.get().load(model.getImage_url()).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                    //if image is failed to load - this image is set to imageview
+            Picasso.get().load(model.getImage_url())
                     .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
                     .fit().centerCrop().into(holder.profile);
         }
@@ -65,7 +65,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter<EventDataModel, Event
         TextView address;
         ImageView profile;
         Button book_button;
-        public String email_text,facility_name;
+        public String email_text,event_name;
         public EventHolder(@NonNull final View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.event_title);
@@ -78,12 +78,12 @@ public class EventAdapter extends FirestoreRecyclerAdapter<EventDataModel, Event
                 @Override
                 public void onClick(View view) {
                     mContext = view.getContext();
-                    Intent intent = new Intent(mContext, BookingActivity.class);
+                    Intent intent = new Intent(mContext, EventBooking.class);
                     //intent.putExtra(BookingActivity.emailItem, email_text);
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("facility_item_id", email_text);
-                    editor.putString("facility_item_name", facility_name);//InputString: from the EditText
+                    editor.putString("event_item_id", email_text);
+                    editor.putString("event_item_name", event_name);//InputString: from the EditText
                     editor.apply();
                     mContext.startActivity(intent);
                 }
