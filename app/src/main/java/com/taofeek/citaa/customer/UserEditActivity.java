@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.taofeek.citaa.LoginActivity;
 import com.taofeek.citaa.R;
 
 import java.util.HashMap;
@@ -56,6 +57,11 @@ public class UserEditActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_edit);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(UserEditActivity.this);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("profile_state", "old");
+        editor.apply();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mName = findViewById(R.id.user_edit_name);
@@ -74,6 +80,8 @@ public class UserEditActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 addTextDocuments();
                 uploadFile();
+                startActivity(new Intent(UserEditActivity.this,HomeActivity.class));
+                finish();
             }
         });
         retrieveProfilePhoto();

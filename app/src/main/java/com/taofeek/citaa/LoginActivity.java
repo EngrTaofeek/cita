@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -32,6 +33,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.taofeek.citaa.customer.HomeActivity;
+import com.taofeek.citaa.customer.UserEditActivity;
+import com.taofeek.citaa.organization.FacilityEditActivity;
 import com.taofeek.citaa.organization.FacilityHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -145,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            Log.d("google", "onActivityResult: attempted google signIN");
             handleSignInResult(task);
         }
     }
@@ -173,15 +177,29 @@ public class LoginActivity extends AppCompatActivity {
                     hideDialog();
                     editor.putString("login_user_state","facilitator");
                     editor.apply();
-                    startActivity(facility_intent);
-                    finish();
+                    final String data = prefs.getString("profile_state", "new");
+                    if (data == "old"){
+                        startActivity(facility_intent);
+                        finish();
+                    }
+                    else {
+                        startActivity(new Intent(LoginActivity.this, FacilityEditActivity.class));
+                        finish();
+                    }
                 }
                 else {
                     editor.putString("login_user_state","consumer");
                     editor.apply();
                     hideDialog();
-                    startActivity(user_intent);
-                    finish();
+                    final String data = prefs.getString("profile_state", "new");
+                    if (data == "old"){
+                        startActivity(user_intent);
+                        finish();
+                    }
+                    else {
+                        startActivity(new Intent(LoginActivity.this, UserEditActivity.class));
+                        finish();
+                    }
 
                 }
             }
@@ -237,16 +255,29 @@ public class LoginActivity extends AppCompatActivity {
                             if (mCheckBox.isChecked()){
                                 editor.putString("login_user_state","facilitator");
                                 editor.apply();
-                                startActivity(facility_intent);
-                                finish();
+                                final String data = prefs.getString("profile_state", "new");
+                                if (data == "old"){
+                                    startActivity(facility_intent);
+                                    finish();
+                                }
+                                else {
+                                    startActivity(new Intent(LoginActivity.this, FacilityEditActivity.class));
+                                    finish();
+                                }
+
                             }
                             else {
                                 editor.putString("login_user_state","consumer");
                                 editor.apply();
-
-                                startActivity(user_intent);
-                                finish();
-
+                                final String data = prefs.getString("profile_state", "new");
+                                if (data == "old"){
+                                    startActivity(user_intent);
+                                    finish();
+                                }
+                                else {
+                                    startActivity(new Intent(LoginActivity.this, UserEditActivity.class));
+                                    finish();
+                                }
                             }
                                  }
                         else {
