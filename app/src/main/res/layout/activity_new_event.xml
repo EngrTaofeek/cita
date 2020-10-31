@@ -20,7 +20,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:tint="@color/button_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,17 +32,10 @@
             android:layout_marginTop="84dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/edit_background"
+            android:background="#FFFFFF"
             android:elevation="10dp"
-            android:fontFamily="@font/nunito"
             android:hint="Title"
-
-            android:paddingStart="12dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="12dp"
-            android:textColor="@color/light_blue"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -52,8 +44,6 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="32dp"
@@ -68,8 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Description"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toStartOf="@+id/editTextTitle"
             app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
@@ -81,18 +69,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/edit_background"
+            android:background="#FFFFFF"
             android:ems="10"
-
-            android:fontFamily="@font/nunito"
             android:hint="Description"
-            android:inputType="textMultiLine"
-            android:textSize="18sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="@color/light_blue"
+            android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -103,9 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Capacity"
+            android:textColor="@color/darkblack"
             android:textSize="24sp"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
             app:layout_constraintStart_toStartOf="@+id/editTextTextDescription"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextDescription" />
 
@@ -116,16 +95,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/edit_background"
+            android:background="#FFFFFF"
             android:elevation="10dp"
-            android:fontFamily="@font/nunito"
-            android:hint="Capacity"
-            android:textSize="18sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="@color/light_blue"
+            android:hint="Title"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -137,8 +110,6 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
             android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,58 +122,14 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/edit_background"
+            android:background="#FFFFFF"
             android:elevation="10dp"
-            android:fontFamily="@font/nunito"
             android:hint="Address"
-            android:inputType="textMultiLine|text"
-            android:textSize="18sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="@color/light_blue"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/textViewPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
-            android:text="Phone"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
-
-        <EditText
-            android:id="@+id/editTextPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/edit_background"
-            android:elevation="10dp"
-            android:fontFamily="@font/nunito"
-            android:hint="Phone number"
-            android:inputType="text|phone"
-            android:paddingStart="12dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="12dp"
-            android:textColor="@color/light_blue"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPhone" />
 
         <TextView
             android:id="@+id/textView6"
@@ -211,12 +138,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
             android:text="Time"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_time"
@@ -238,8 +163,6 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Time"
-                android:textColor="@color/light_blue"
-                android:fontFamily="@font/nunito"
                 android:textSize="24sp" />
         </androidx.cardview.widget.CardView>
 
@@ -251,8 +174,6 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
             android:text="Date"
-            android:textColor="@color/light_blue"
-            android:fontFamily="@font/nunito"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_time" />
@@ -276,8 +197,6 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Date"
-                android:textColor="@color/light_blue"
-                android:fontFamily="@font/nunito"
                 android:textSize="24sp" />
 
         </androidx.cardview.widget.CardView>
