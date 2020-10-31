@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -65,6 +66,14 @@ public class EventBooking extends AppCompatActivity {
         populateTextView("permissible_capacity",capacity);
         populateTextView("time",time);
         populateTextView("date", date);
+        ImageView backImage = findViewById(R.id.imageView);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventBooking.this, HomeActivity.class));
+                finish();
+            }
+        });
         Button bookButton = findViewById(R.id.button_book);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +104,8 @@ public class EventBooking extends AppCompatActivity {
     }
     private void saveUserSchedule(){
         Map<String, Object> user = new HashMap<>();
+        mTime = time.getText().toString();
+        mCurrentDateString = date.getText().toString();
         user.put("time", mTime );
         user.put("email", mUserMail);
         user.put("name", mFacilityTitle);

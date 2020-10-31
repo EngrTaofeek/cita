@@ -53,8 +53,10 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/darkblack"
+                    android:fontFamily="@font/nunito"
                     android:text="Taofeek Oduola"
+                    android:textColor="@color/button_color"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/schedule_picture"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/schedule_number"
@@ -65,8 +67,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/darkblack"
+                    android:fontFamily="@font/nunito"
                     android:text="oduola.taofeekkola@gmail.com"
+                    android:textColor="#4D000000"
+                    android:textSize="11sp"
                     app:layout_constraintEnd_toStartOf="@+id/schedule_picture"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/schedule_name"
@@ -84,13 +88,19 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_person_24" />
 
+
+
+
+
                 <TextView
                     android:id="@+id/schedule_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/darkblack"
+                    android:fontFamily="@font/nunito"
                     android:text="21st, September 2020"
+                    android:textColor="@color/darkblack"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@+id/schedule_email"
                     app:layout_constraintTop_toBottomOf="@+id/schedule_email" />
 
@@ -107,8 +117,10 @@
                     android:id="@+id/schedule_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
                     android:text="12:30am"
                     android:textColor="@color/darkblack"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/textView17"
                     app:layout_constraintTop_toTopOf="@+id/schedule_date" />
 
@@ -129,7 +141,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:text="Pending"
-                    android:textColor="@color/darkblack"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toEndOf="@+id/textView16"
                     app:layout_constraintTop_toTopOf="@+id/textView16" />
 

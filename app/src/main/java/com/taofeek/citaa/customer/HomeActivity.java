@@ -159,12 +159,7 @@ public class HomeActivity extends AppCompatActivity {
         // Picasso.get().load(mImageUri).into(mImageView);
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.user_home, menu);
-        return true;
-    }
+
 
 
 }

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,6 +50,7 @@ public class FacilityHomeActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
+
         toggle.syncState();
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this,getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager_facility);
@@ -59,6 +61,7 @@ public class FacilityHomeActivity extends AppCompatActivity {
         mImageView = hView.findViewById(R.id.nav_image_view);
         mNameTextView = hView.findViewById(R.id.nav_header_title);
         mEmailTextView = hView.findViewById(R.id.nav_email);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -129,6 +132,7 @@ public class FacilityHomeActivity extends AppCompatActivity {
         // Picasso.get().load(mImageUri).into(mImageView);
 
     }
+
     @Override
     protected void onStart() {
         retrieveNavHeader();

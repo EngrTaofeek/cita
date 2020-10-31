@@ -31,8 +31,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/button_color"
-                app:srcCompat="@drawable/ic_baseline_event_24" />
+                app:srcCompat="@drawable/ic_calendar_1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,8 +73,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/button_color"
-                app:srcCompat="@drawable/ic_baseline_fitness_center_24" />
+                app:srcCompat="@drawable/ic_group" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,8 +108,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/button_color"
-                app:srcCompat="@drawable/ic_baseline_business_24" />
+                app:srcCompat="@drawable/ic_office_1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,8 +144,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/button_color"
-                app:srcCompat="@drawable/ic_baseline_school_24" />
+                app:srcCompat="@drawable/ic_school_1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -182,8 +178,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/button_color"
-                app:srcCompat="@drawable/ic_baseline_sports_soccer_24" />
+                app:srcCompat="@drawable/ic_football_ball_1" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, PopupMenu.OnMenuItemClickListener {
-    EditText mTitle,mAddress,mCapacity,mDescription;
+    EditText mTitle,mAddress,mCapacity,mPhone,mDescription;
     public ImageView mImage;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri mImageUri;
@@ -73,6 +73,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         mAddress = findViewById(R.id.editTextAddress);
         mCapacity = findViewById(R.id.editTextCapacity);
         mDescription = findViewById(R.id.editTextTextDescription);
+        mPhone = findViewById(R.id.editTextPhone);
         Button createEvent = findViewById(R.id.buttonCreate);
         CardView cardTime = findViewById(R.id.card_time);
         CardView cardDate = findViewById(R.id.card_date);
@@ -116,6 +117,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         String title = getEditText(mTitle);
         String description = getEditText(mDescription);
         String capacity = getEditText(mCapacity);
+        String phone = getEditText(mPhone);
         int capacity_int = Integer.parseInt(capacity);
         int permissible_capacity_int = (int) (capacity_int * 0.5);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -128,6 +130,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         user.put("time",mTime);
         user.put("date",mCurrentDateString);
         user.put("capacity", capacity_int);
+        user.put("phone", phone);
         user.put("permissible_capacity", permissible_capacity_int);
 
 
@@ -166,8 +169,7 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
-            Picasso.get().load(mImageUri).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                    .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+            Picasso.get().load(mImageUri)
                     .fit().centerCrop().into(mImage);
         }
     }

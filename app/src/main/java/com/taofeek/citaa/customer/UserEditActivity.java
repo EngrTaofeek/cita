@@ -125,7 +125,7 @@ public class UserEditActivity extends AppCompatActivity  {
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                        Picasso.get().load(field)
                                  .fit()//stores images for offline view
                                 .centerCrop().into(mImageView);
                     }
@@ -212,8 +212,7 @@ public class UserEditActivity extends AppCompatActivity  {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
-            Picasso.get().load(mImageUri).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                    .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+            Picasso.get().load(mImageUri)
                     .fit().centerCrop().into(mImageView);
         }
     }

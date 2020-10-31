@@ -58,6 +58,7 @@
                     app:layout_constraintStart_toStartOf="@+id/schedule_name_facility"
                     app:layout_constraintTop_toBottomOf="@+id/schedule_name_facility" />
 
+
                 <ImageView
                     android:id="@+id/schedule_picture_facility"
                     android:layout_width="75dp"
@@ -69,6 +70,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_supervisor_account_24" />
+
 
                 <TextView
                     android:id="@+id/schedule_date"

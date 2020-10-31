@@ -91,4 +91,5 @@
     <string name="booking_date_hint">Choose date for booking.</string>
     <string name="category">CATEGORIES</string>
     <string name="event">EVENTS</string>
+    <string name="action_search">Search</string>
 </resources>

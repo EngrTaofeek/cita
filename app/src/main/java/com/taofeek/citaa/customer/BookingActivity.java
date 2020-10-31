@@ -8,6 +8,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -100,6 +101,14 @@ public class BookingActivity extends AppCompatActivity implements   DatePickerDi
                     });
                 }
 
+            }
+        });
+        ImageView backImage = findViewById(R.id.imageView);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BookingActivity.this, HomeActivity.class));
+                finish();
             }
         });
         CardView date_item = findViewById(R.id.card_view_date_picker);
