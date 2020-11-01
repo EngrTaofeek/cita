@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -40,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     //widgets
     private EditText mEmail, mPassword, mConfirmPassword, validateEmail;
     private Button mRegister;
-    private ProgressBar mProgressBar;
+    private LottieAnimationView mProgressBar;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 9001;
@@ -60,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.password_input);
         mConfirmPassword = (EditText) findViewById(R.id.confirm_password_input);
         mRegister = (Button) findViewById(R.id.button);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = (LottieAnimationView) findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
         mCheckBox = findViewById(R.id.checkbox);
         hideDialog();

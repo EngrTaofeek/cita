@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // widgets
     private EditText mEmail, mPassword;
-    private ProgressBar mProgressBar;
+    private LottieAnimationView mProgressBar;
     private GoogleSignInClient mGoogleSignInClient;
     private TextView forgotPasswordText;
     private static final int RC_SIGN_IN = 9001;
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.email_input);
         mPassword = (EditText) findViewById(R.id.password_input);
         forgotPasswordText = findViewById(R.id.forgotPassword);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = (LottieAnimationView) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
         mCheckBox = findViewById(R.id.login_check_box);
 

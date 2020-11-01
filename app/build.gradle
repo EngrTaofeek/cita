@@ -50,6 +50,7 @@ dependencies {
     android.defaultConfig.vectorDrawables.useSupportLibrary = true
     implementation 'com.google.firebase:firebase-firestore:21.5.0'
     implementation 'androidx.multidex:multidex:2.0.0'
+    implementation "com.airbnb.android:lottie:3.4.4"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
