@@ -115,8 +115,8 @@
             <Button
                 android:id="@+id/event_view_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:background="@drawable/button_background"

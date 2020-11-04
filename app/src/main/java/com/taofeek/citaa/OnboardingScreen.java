@@ -31,9 +31,17 @@ public class OnboardingScreen extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding_screen);
         button = findViewById(R.id.next_button);
         layoutOnboardingIndicators = findViewById(R.id.layoutOnboardingIndicators);
+        textView = findViewById(R.id.skip);
 
 
-        // Skip text to open another activity when clicked
+        // Skip text to open MainActivity when clicked
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OnboardingScreen.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setUpOnboardingItem();
         setUpOnboardingIndicators();
@@ -49,6 +57,7 @@ public class OnboardingScreen extends AppCompatActivity {
                 setCurrentOnboardingIndicators(position);
             }
         });
+
         // button to move the slides
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +72,7 @@ public class OnboardingScreen extends AppCompatActivity {
         });
     }
 
-    // Onboarding data to be displayed in each slide
+    // Onboarding data to be displayed on each slide
     private void setUpOnboardingItem() {
         List<OnboardingItem> onboardingItems = new ArrayList<>();
 
