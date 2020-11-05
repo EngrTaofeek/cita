@@ -34,7 +34,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/sport_image"
+                android:src="@drawable/image_loading"
                 android:scaleType="fitXY"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"/>

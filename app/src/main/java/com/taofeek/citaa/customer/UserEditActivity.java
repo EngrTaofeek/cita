@@ -67,12 +67,27 @@ public class UserEditActivity extends AppCompatActivity  {
         mName = findViewById(R.id.user_edit_name);
         mProgressBar = findViewById(R.id.progress_bar);
         Button saveButton = findViewById(R.id.user_save_button);
+        ImageView image_icon = findViewById(R.id.imageView7);
+        image_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
         mImageView = findViewById(R.id.user_profile_pic);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
 
+            }
+        });
+        ImageView backImage = findViewById(R.id.imageView);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserEditActivity.this, HomeActivity.class));
+                finish();
             }
         });
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +178,13 @@ public class UserEditActivity extends AppCompatActivity  {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent( UserEditActivity.this,HomeActivity.class));
+        finish();
+    }
+
     public void addTextDocuments(){
         EditText etname = findViewById(R.id.user_edit_name);
         EditText etemail = findViewById(R.id.user_edit_email);
@@ -195,6 +217,7 @@ public class UserEditActivity extends AppCompatActivity  {
 
 
     }
+
     public String getEditText (EditText editText){
         String text = editText.getText().toString().trim();
         return text;
