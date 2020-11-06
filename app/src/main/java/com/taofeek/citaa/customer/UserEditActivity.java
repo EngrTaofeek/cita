@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,7 +50,6 @@ public class UserEditActivity extends AppCompatActivity  {
     private Uri mImageUri;
     private StorageTask mUploadTask;
     private StorageReference   mStorageRef;
-    private ProgressBar mProgressBar;
 
 
 
@@ -68,7 +68,6 @@ public class UserEditActivity extends AppCompatActivity  {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mName = findViewById(R.id.user_edit_name);
-        mProgressBar = findViewById(R.id.progress_bar);
         Button saveButton = findViewById(R.id.user_save_button);
         ImageView image_icon = findViewById(R.id.imageView7);
         image_icon.setOnClickListener(new View.OnClickListener() {
@@ -259,7 +258,7 @@ public class UserEditActivity extends AppCompatActivity  {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mProgressBar.setProgress(0);
+
                                 }
                             }, 500);
                             Toast.makeText(UserEditActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
@@ -307,7 +306,7 @@ public class UserEditActivity extends AppCompatActivity  {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mProgressBar.setProgress((int) progress);
+
                         }
                     });
         } else {

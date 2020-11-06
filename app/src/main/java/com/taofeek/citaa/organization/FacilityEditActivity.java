@@ -49,7 +49,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     private Uri mImageUri;
     private StorageTask mUploadTask;
     private StorageReference mStorageRef;
-    private ProgressBar mProgressBar;
     private FirebaseFirestore mDb;
     private String mEmail;
     private Spinner mSpinner;
@@ -89,7 +88,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
 
 
         mProfileImage = findViewById(R.id.facility_profile_image);
-        mProgressBar = findViewById(R.id.progress_bar);
+
         final String data = prefs.getString("email_id", "default_email");
 
 
@@ -113,6 +112,14 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
         });
         retrieveProfilePhoto();
 
+        ImageView backImage = findViewById(R.id.imageView);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FacilityEditActivity.this, FacilityHomeActivity.class));
+                finish();
+            }
+        });
 
 
 
@@ -252,7 +259,6 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mProgressBar.setProgress(0);
                                 }
                             }, 500);
                             Toast.makeText(FacilityEditActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
@@ -300,8 +306,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mProgressBar.setProgress((int) progress);
+
                         }
                     });
         } else {
@@ -353,7 +358,7 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
+                        Picasso.get().load(field) // during loading this image will be set imageview
                                .fit().centerCrop()   // apply scaling OR
                                 .into(mProfileImage);
                     }
