@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -71,7 +72,7 @@ public class FacilityHomeActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.nav_schedule:
-                        Snackbar.make(findViewById(R.id.nav_view), "Schedule is upcoming", Snackbar.LENGTH_LONG).show();
+                        drawer.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.nav_edit_profile:

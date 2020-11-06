@@ -30,6 +30,7 @@ import com.taofeek.citaa.organization.FacilityHomeActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.nav_schedule:
-                        Snackbar.make(findViewById(R.id.nav_view), "Donate", Snackbar.LENGTH_LONG).show();
+                        drawer.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.nav_edit_profile:
                         Intent editIntent = new Intent(HomeActivity.this, UserEditActivity.class);
