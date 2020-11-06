@@ -68,6 +68,9 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility_edit);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(FacilityEditActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("profile_state", "old");

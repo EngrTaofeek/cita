@@ -36,6 +36,8 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.taofeek.citaa.R;
+import com.taofeek.citaa.customer.HomeActivity;
+import com.taofeek.citaa.customer.UserEditActivity;
 import com.taofeek.citaa.time.DatePickerFragment;
 
 import java.text.DateFormat;
@@ -60,6 +62,9 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mTextViewTime = findViewById(R.id.textView7);
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDb = FirebaseFirestore.getInstance();
@@ -89,6 +94,15 @@ public class NewEvent extends AppCompatActivity implements DatePickerDialog.OnDa
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(),"date picker");
+            }
+        });
+
+        ImageView backImage = findViewById(R.id.imageView);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewEvent.this, FacilityHomeActivity.class));
+                finish();
             }
         });
 

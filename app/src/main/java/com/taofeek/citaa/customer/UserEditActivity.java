@@ -57,6 +57,9 @@ public class UserEditActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_edit);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(UserEditActivity.this);
 
         SharedPreferences.Editor editor = prefs.edit();
