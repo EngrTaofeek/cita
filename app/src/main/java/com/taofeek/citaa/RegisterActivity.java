@@ -119,6 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showDialog();
                 signIn();
             }
         });

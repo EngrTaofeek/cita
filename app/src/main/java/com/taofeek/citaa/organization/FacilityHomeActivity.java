@@ -115,6 +115,10 @@ public class FacilityHomeActivity extends AppCompatActivity {
                         String field = document.getString("image_url");
                         Picasso.get().load(field).into(mImageView);
                     }
+                    if (!(document.exists())){
+                        Picasso.get().load(R.drawable.single_image)
+                                .fit().centerCrop().into(mImageView);
+                    }
                 }
             }
         });db.collection("users").document("details").collection("profile")

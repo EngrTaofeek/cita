@@ -132,6 +132,10 @@ public class EventBooking extends AppCompatActivity {
                                 .fit().centerCrop()   // apply scaling OR
                                 .into(profile);
                     }
+                    if (!(document.exists())){
+                        Picasso.get().load(R.drawable.ic_baseline_supervisor_account_24)
+                                .fit().centerCrop().into(profile);
+                    }
                 }
             }
         });

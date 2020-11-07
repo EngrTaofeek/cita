@@ -132,9 +132,10 @@ public class HomeActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if ( document.exists()) {
                         String field = document.getString("image_url");
-                        Picasso.get().load(field).placeholder(R.drawable.image_loading) // during loading this image will be set imageview
-                                .error(R.drawable.ic_baseline_error_24) //if image is failed to load - this image is set to imageview
-                                .networkPolicy(NetworkPolicy.OFFLINE) //stores images for offline view
+                        Picasso.get().load(field).fit().centerCrop().into(mImageView);
+                    }
+                    if (!(document.exists())){
+                        Picasso.get().load(R.drawable.single_image)
                                 .fit().centerCrop().into(mImageView);
                     }
                 }

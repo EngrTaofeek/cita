@@ -146,6 +146,10 @@ public class UserEditActivity extends AppCompatActivity  {
                                  .fit()//stores images for offline view
                                 .centerCrop().into(mImageView);
                     }
+                    if (!(document.exists())){
+                        Picasso.get().load(R.drawable.single_image)
+                                .fit().centerCrop().into(mImageView);
+                    }
                 }
             }
         });

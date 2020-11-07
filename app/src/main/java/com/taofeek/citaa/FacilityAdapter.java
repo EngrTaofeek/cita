@@ -44,6 +44,10 @@ public class FacilityAdapter extends FirestoreRecyclerAdapter<FacilityDataModel,
             Picasso.get().load(model.getImage_url())
                     .fit().centerCrop().into(holder.profile);
         }
+        if (model.getImage_url() == null){
+            Picasso.get().load(R.drawable.ic_baseline_supervisor_account_24)
+                    .fit().centerCrop().into(holder.profile);
+        }
 
 
 

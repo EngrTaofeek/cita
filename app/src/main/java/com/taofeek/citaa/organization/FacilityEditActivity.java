@@ -362,6 +362,10 @@ public class FacilityEditActivity extends AppCompatActivity implements AdapterVi
                                .fit().centerCrop()   // apply scaling OR
                                 .into(mProfileImage);
                     }
+                    if (!(document.exists())){
+                        Picasso.get().load(R.drawable.facilitator_image)
+                                .fit().centerCrop().into(mProfileImage);
+                    }
                 }
             }
         });
