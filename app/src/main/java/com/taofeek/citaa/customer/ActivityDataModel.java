@@ -1,6 +1,10 @@
 package com.taofeek.citaa.customer;
 
-public class ActivityDataModel {
+import androidx.annotation.Keep;
+
+import java.io.Serializable;
+@Keep
+public class ActivityDataModel implements Serializable {
     public String date,time,name,status;
     public ActivityDataModel(){
 

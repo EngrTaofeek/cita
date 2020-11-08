@@ -1,6 +1,8 @@
 package com.taofeek.citaa.customer;
 
-public class Upload {
+import java.io.Serializable;
+
+public class Upload implements Serializable {
     private String name;
     private String imageurl;
     public Upload() {

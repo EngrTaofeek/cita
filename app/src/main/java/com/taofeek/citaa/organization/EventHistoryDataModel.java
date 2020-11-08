@@ -1,6 +1,10 @@
 package com.taofeek.citaa.organization;
 
-public class EventHistoryDataModel {
+import androidx.annotation.Keep;
+
+import java.io.Serializable;
+@Keep
+public class EventHistoryDataModel implements Serializable {
     public String title,date,time;
 
     public EventHistoryDataModel(String title, String date, String time) {

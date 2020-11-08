@@ -1,10 +1,14 @@
 package com.taofeek.citaa.organization;
 
-public class ScheduleDataModel {
-    private String date;
-    private String time;
-    private String email;
-    private String name;
+import androidx.annotation.Keep;
+
+import java.io.Serializable;
+@Keep
+public class ScheduleDataModel implements Serializable {
+    public String date;
+    public String time;
+    public String email;
+    public String name;
 
     public String getStatus() {
         return status;

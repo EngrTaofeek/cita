@@ -1,19 +1,23 @@
 package com.taofeek.citaa;
 
-public class FacilityDataModel {
-    private  String name;
-    private String address;
-    private String email;
-    private String phone;
-    private String overview;
-    private int capacity;
+import androidx.annotation.Keep;
+
+import java.io.Serializable;
+@Keep
+public class FacilityDataModel implements Serializable {
+    public  String name;
+    public String address;
+    public String email;
+    public String phone;
+    public String overview;
+    public int capacity;
 
 
 
-    private int permissible_capacity;
-    private String others;
+    public int permissible_capacity;
+    public String others;
 
-    private String image_url;
+    public String image_url;
 
     public FacilityDataModel() {
         //empty constructor

@@ -1,6 +1,10 @@
 package com.taofeek.citaa;
 
-public class EventDataModel {
+import androidx.annotation.Keep;
+
+import java.io.Serializable;
+@Keep
+public class EventDataModel implements Serializable {
     public String email,title,address,description,category,time,date;
     public int capacity;
     public String image_url;
