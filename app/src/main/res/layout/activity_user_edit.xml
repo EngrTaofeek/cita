@@ -1,219 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".customer.UserEditActivity">
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cardTitle"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Profile"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    app:drawableTint="@color/button_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_pic"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/single_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardTitle" />
 
         <TextView
-            android:id="@+id/book_title"
+            android:id="@+id/fullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text= "Profile"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            app:drawableTint="@color/button_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/full_name"
+            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_pic" />
+
+        <EditText
+            android:id="@+id/user_edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/edit_background"
+            android:hint="Samuel Ajanlekoko"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/darkblack"
+            android:textColorHint="@color/light_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fullName" />
+
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/email"
+            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_edit_name" />
+
+        <EditText
+            android:id="@+id/user_edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/edit_background"
+            android:hint="Samuelajanlekoko@gmail.com"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/darkblack"
+            android:textColorHint="@color/light_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/address"
+            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_edit_email" />
+
+        <EditText
+            android:id="@+id/user_edit_address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/edit_background"
+            android:hint="Olusare Olugbagi street"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/darkblack"
+            android:textColorHint="@color/light_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/address" />
+
+        <TextView
+            android:id="@+id/phoneNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/phone"
+            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_edit_address" />
+
+        <EditText
+            android:id="@+id/user_edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/edit_background"
+            android:hint="07065334512"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/darkblack"
+            android:textColorHint="@color/light_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneNo" />
+
+        <Button
+            android:id="@+id/user_save_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/button_background"
+            android:text="@string/save"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_edit_phone" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/user_profile_pic"
+            app:layout_constraintEnd_toEndOf="@+id/user_profile_pic"
+            app:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_profile_pic"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/single_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardTitle" />
-
-    <TextView
-        android:id="@+id/fullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_profile_pic"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/light_blue"
-        android:fontFamily="@font/nunito"
-        android:layout_marginTop="10dp"
-        android:text="@string/full_name"/>
-
-    <EditText
-        android:id="@+id/user_edit_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Samuel Ajanlekoko"
-        android:textColorHint="@color/light_blue"
-        android:textColor="@color/darkblack"
-        android:paddingStart="12dp"
-        android:background="@drawable/edit_background"
-        app:layout_constraintTop_toBottomOf="@id/fullName"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="12dp"/>
-
-
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_edit_name"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/light_blue"
-        android:fontFamily="@font/nunito"
-        android:layout_marginTop="10dp"
-        android:text="@string/email"/>
-
-    <EditText
-        android:id="@+id/user_edit_email"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Samuelajanlekoko@gmail.com"
-        android:textColorHint="@color/light_blue"
-        android:textColor="@color/darkblack"
-        android:paddingStart="12dp"
-        android:background="@drawable/edit_background"
-        app:layout_constraintTop_toBottomOf="@id/email"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="12dp"/>
-
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_edit_email"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/light_blue"
-        android:fontFamily="@font/nunito"
-        android:layout_marginTop="10dp"
-        android:text="@string/address"/>
-
-    <EditText
-        android:id="@+id/user_edit_address"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Olusare Olugbagi street"
-        android:textColorHint="@color/light_blue"
-        android:textColor="@color/darkblack"
-        android:paddingStart="12dp"
-        android:paddingLeft="12dp"
-        android:background="@drawable/edit_background"
-        app:layout_constraintTop_toBottomOf="@id/address"
-        android:layout_marginTop="5dp"
-        />
-
-    <TextView
-        android:id="@+id/phoneNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_edit_address"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/light_blue"
-        android:fontFamily="@font/nunito"
-        android:layout_marginTop="10dp"
-        android:text="@string/phone"/>
-
-    <EditText
-        android:id="@+id/user_edit_phone"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="07065334512"
-        android:textColorHint="@color/light_blue"
-        android:textColor="@color/darkblack"
-        android:paddingStart="12dp"
-        android:background="@drawable/edit_background"
-        app:layout_constraintTop_toBottomOf="@id/phoneNo"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="12dp"/>
-
-    <Button
-        android:id="@+id/user_save_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_edit_phone"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:text="@string/save"
-        android:background="@drawable/button_background"/>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/user_profile_pic"
-        app:layout_constraintEnd_toEndOf="@+id/user_profile_pic"
-        app:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
